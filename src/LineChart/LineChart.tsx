@@ -1,3 +1,9 @@
-const LineChart = ({ label }: { label: string }) => <div>{label}</div>;
+import React from 'react';
 
-export default LineChart;
+export interface LineChartProps {
+  label: string;
+}
+
+export const LineChart: React.FC<LineChartProps> = ({ label }) => (
+  <div>{label}</div>
+);

@@ -9,12 +9,20 @@
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
-    "prettier:all": "prettier --single-quote --write '*.{js,jsx,ts,tsx,json,css,md}'"
+    "prettier:all": "prettier --single-quote --write '*.{js,jsx,ts,tsx,json,css,md}'",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {},
   "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@storybook/addon-actions": "^6.1.21",
+    "@storybook/addon-essentials": "^6.1.21",
+    "@storybook/addon-links": "^6.1.21",
+    "@storybook/react": "^6.1.21",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.2",
+    "babel-loader": "^8.2.2",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
