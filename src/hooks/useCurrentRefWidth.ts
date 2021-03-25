@@ -23,6 +23,9 @@ export default function useCurrentWidth(ref?: any) {
     // set resize listener
     window.addEventListener('resize', resizeListener);
 
+    // set width initially
+    setWidth(getWidth(ref));
+
     // clean up function
     return () => {
       // remove resize listener
