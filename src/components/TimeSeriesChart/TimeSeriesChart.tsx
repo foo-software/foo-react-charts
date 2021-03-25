@@ -15,7 +15,7 @@ import { WithTooltipProvidedProps } from '@visx/tooltip/lib/enhancers/withToolti
 import { localPoint } from '@visx/event';
 import { max, extent, bisector } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
-import useCurrentRefWidth from '../../hooks/useCurrentRefWidth';
+import useRefWidth from '../../hooks/useRefWidth';
 
 // util
 const formatDate = timeFormat('%x %X');
@@ -55,7 +55,7 @@ export default withTooltip(
     tooltipLeft = 0,
   }: TimeSeriesChartProps) => {
     const containerRef = useRef(null);
-    const width = useCurrentRefWidth(containerRef);
+    const width = useRefWidth(containerRef);
 
     // bounds
     const innerWidth = width - margin.left - margin.right;

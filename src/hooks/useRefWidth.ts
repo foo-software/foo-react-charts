@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 const getWidth = (ref: any): number =>
   !ref || !ref.current ? 0 : ref.current.offsetWidth;
 
-export default function useCurrentWidth(ref?: any) {
+export default function useRefWidth(ref?: any) {
   // save current window width in the state object
   let [width, setWidth] = useState(getWidth(ref));
 
