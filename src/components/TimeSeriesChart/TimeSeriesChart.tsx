@@ -15,6 +15,7 @@ import { WithTooltipProvidedProps } from '@visx/tooltip/lib/enhancers/withToolti
 import { localPoint } from '@visx/event';
 import { max, extent, bisector } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
+import numberWithCommas from '../../helpers/numberWithCommas';
 import useRefWidth from '../../hooks/useRefWidth';
 
 // util
@@ -36,6 +37,7 @@ type TimeSeriesChartPropsDefault = {
   margin?: { top: number; right: number; bottom: number; left: number };
   primaryColor?: string;
   secondaryColor?: string;
+  valuePrefix?: string;
 };
 
 export type TimeSeriesChartProps = TimeSeriesChartPropsDefault &
@@ -53,6 +55,7 @@ export default withTooltip(
     tooltipData,
     tooltipTop = 0,
     tooltipLeft = 0,
+    valuePrefix = '',
   }: TimeSeriesChartProps) => {
     const containerRef = useRef(null);
     const width = useRefWidth(containerRef);
@@ -167,7 +170,7 @@ export default withTooltip(
                 color: '#ffffff',
               }}
             >
-              {`$${getValue(tooltipData)}`}
+              {`${valuePrefix}${numberWithCommas(getValue(tooltipData))}`}
             </TooltipWithBounds>
             <Tooltip
               top={innerHeight + margin.top - 14}

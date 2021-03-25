@@ -19,4 +19,5 @@ const Template: Story<TimeSeriesChartProps> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   height: 100,
+  valuePrefix: '$',
 };
