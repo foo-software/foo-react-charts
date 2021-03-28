@@ -11,7 +11,6 @@ import {
   defaultStyles as defaultTooltipStyles,
 } from '@visx/tooltip';
 import { DateValue } from '@visx/mock-data/lib/generators/genDateValue';
-import { WithTooltipProvidedProps } from '@visx/tooltip/lib/enhancers/withTooltip';
 import { localPoint } from '@visx/event';
 import { max, extent, bisector } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
@@ -31,17 +30,19 @@ type DataType = {
   value: number;
 };
 
-type TimeSeriesChartPropsDefault = {
+export type TimeSeriesChartProps = {
   data: Array<DataType | DateValue>;
   height: number;
+  hideTooltip?: any;
   margin?: { top: number; right: number; bottom: number; left: number };
   primaryColor?: string;
   secondaryColor?: string;
+  showTooltip?: any;
+  tooltipData?: any;
+  tooltipTop?: number;
+  tooltipLeft?: number;
   valuePrefix?: string;
 };
-
-export type TimeSeriesChartProps = TimeSeriesChartPropsDefault &
-  WithTooltipProvidedProps<any>;
 
 export default withTooltip(
   ({
@@ -84,6 +85,7 @@ export default withTooltip(
     );
 
     // tooltip handler
+    // pretty much a copy from: https://airbnb.io/visx/areas
     const handleTooltip = useCallback(
       (
         event:
@@ -113,7 +115,10 @@ export default withTooltip(
     );
 
     return (
-      <div ref={containerRef} style={{ width: '100%', fontFamily: 'arial' }}>
+      <div
+        ref={containerRef}
+        style={{ width: '100%', fontFamily: 'arial' }}
+      >
         <svg width={width} height={height}>
           <rect fill="transparent" x={0} y={0} width={width} height={height} />
           <Area
@@ -126,6 +131,7 @@ export default withTooltip(
             curve={curveMonotoneX}
           />
           <Bar
+            data-testid="foo-time-series-chart-bar"
             x={margin.left}
             y={margin.top}
             width={innerWidth}
