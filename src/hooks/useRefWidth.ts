@@ -15,8 +15,6 @@ export default function useRefWidth(ref?: any) {
     const resizeListener = () => {
       // prevent execution of previous setTimeout
       clearTimeout(timeoutId);
-
-      // change width from the state object after 300 milliseconds
       timeoutId = setTimeout(() => setWidth(getWidth(ref)), 300);
     };
 
@@ -32,4 +30,4 @@ export default function useRefWidth(ref?: any) {
   }, [ref.current]);
 
   return width;
-};
+}
