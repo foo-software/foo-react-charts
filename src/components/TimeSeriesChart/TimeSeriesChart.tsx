@@ -72,7 +72,7 @@ export default withTooltip(
           range: [margin.left, innerWidth + margin.left],
           domain: extent(data, getDate) as [Date, Date],
         }),
-      [innerWidth, margin.left]
+      [innerWidth, margin.left],
     );
     const valueScale = useMemo(
       () =>
@@ -81,7 +81,7 @@ export default withTooltip(
           domain: [0, (max(data, getValue) || 0) + innerHeight / 3],
           nice: true,
         }),
-      [margin.top, innerHeight]
+      [margin.top, innerHeight],
     );
 
     // tooltip handler
@@ -90,7 +90,7 @@ export default withTooltip(
       (
         event:
           | React.TouchEvent<SVGRectElement>
-          | React.MouseEvent<SVGRectElement>
+          | React.MouseEvent<SVGRectElement>,
       ) => {
         const { x } = localPoint(event) || { x: 0 };
         const x0 = dateScale.invert(x);
@@ -111,14 +111,11 @@ export default withTooltip(
           tooltipTop: valueScale(getValue(d)),
         });
       },
-      [showTooltip, valueScale, dateScale]
+      [showTooltip, valueScale, dateScale],
     );
 
     return (
-      <div
-        ref={containerRef}
-        style={{ width: '100%', fontFamily: 'arial' }}
-      >
+      <div ref={containerRef} style={{ width: '100%', fontFamily: 'arial' }}>
         <svg width={width} height={height}>
           <rect fill="transparent" x={0} y={0} width={width} height={height} />
           <Area
@@ -131,7 +128,7 @@ export default withTooltip(
             curve={curveMonotoneX}
           />
           <Bar
-            data-testid="foo-time-series-chart-bar"
+            data-testid="time-series-chart-bar"
             x={margin.left}
             y={margin.top}
             width={innerWidth}
@@ -195,5 +192,5 @@ export default withTooltip(
         )}
       </div>
     );
-  }
+  },
 );

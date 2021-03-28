@@ -20,34 +20,29 @@ const mockData = [
 ];
 
 describe('TimeSeriesChart', () => {
-  test('renders component with tooltip', () => {
-    render(
-      <TimeSeriesChart
-        data={mockData}
-        height={100}
-      />
-    );
+  describe('tooltip', () => {
+    test('displays value', () => {
+      render(<TimeSeriesChart data={mockData} height={100} />);
 
-    const timeSeriesChartBarElement = screen.getByTestId('foo-time-series-chart-bar');
-    userEvent.hover(timeSeriesChartBarElement);
+      const timeSeriesChartBarElement = screen.getByTestId(
+        'foo-time-series-chart-bar',
+      );
+      userEvent.hover(timeSeriesChartBarElement);
 
-    const tooltipElement = screen.getByText(/1,000|1,500|2,000/i);
-    expect(tooltipElement).toBeInTheDocument();
-  });
+      const tooltipElement = screen.getByText(/1,000|1,500|2,000/i);
+      expect(tooltipElement).toBeInTheDocument();
+    });
 
-  test('renders component with tooltip using dollar prefix', () => {
-    render(
-      <TimeSeriesChart
-        data={mockData}
-        height={100}
-        valuePrefix="$"
-      />
-    );
+    test('displays value with prefix', () => {
+      render(<TimeSeriesChart data={mockData} height={100} valuePrefix="$" />);
 
-    const timeSeriesChartBarElement = screen.getByTestId('foo-time-series-chart-bar');
-    userEvent.hover(timeSeriesChartBarElement);
+      const timeSeriesChartBarElement = screen.getByTestId(
+        'foo-time-series-chart-bar',
+      );
+      userEvent.hover(timeSeriesChartBarElement);
 
-    const tooltipElement = screen.getByText(/\$1,000|\$1,500|\$2,000/i);
-    expect(tooltipElement).toBeInTheDocument();
+      const tooltipElement = screen.getByText(/\$1,000|\$1,500|\$2,000/i);
+      expect(tooltipElement).toBeInTheDocument();
+    });
   });
 });
