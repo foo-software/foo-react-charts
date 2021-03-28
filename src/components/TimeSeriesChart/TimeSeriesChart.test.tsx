@@ -24,25 +24,15 @@ describe('TimeSeriesChart', () => {
     test('displays value', () => {
       render(<TimeSeriesChart data={mockData} height={100} />);
 
-      const timeSeriesChartBarElement = screen.getByTestId(
-        'foo-time-series-chart-bar',
-      );
-      userEvent.hover(timeSeriesChartBarElement);
-
-      const tooltipElement = screen.getByText(/1,000|1,500|2,000/i);
-      expect(tooltipElement).toBeInTheDocument();
+      userEvent.hover(screen.getByTestId('time-series-chart-bar'));
+      expect(screen.getByText(/1,000|1,500|2,000/i)).toBeInTheDocument();
     });
 
     test('displays value with prefix', () => {
       render(<TimeSeriesChart data={mockData} height={100} valuePrefix="$" />);
 
-      const timeSeriesChartBarElement = screen.getByTestId(
-        'foo-time-series-chart-bar',
-      );
-      userEvent.hover(timeSeriesChartBarElement);
-
-      const tooltipElement = screen.getByText(/\$1,000|\$1,500|\$2,000/i);
-      expect(tooltipElement).toBeInTheDocument();
+      userEvent.hover(screen.getByTestId('time-series-chart-bar'));
+      expect(screen.getByText(/\$1,000|\$1,500|\$2,000/i)).toBeInTheDocument();
     });
   });
 });
