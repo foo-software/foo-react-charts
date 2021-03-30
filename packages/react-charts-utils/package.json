@@ -1,0 +1,30 @@
+{
+  "name": "@foo-software/react-charts-utils",
+  "version": "0.0.1",
+  "author": "Adam Henson <adamhenson1979@gmail.com> (https://github.com/adamhenson)",
+  "description": "Utility functions and hooks to use with Foo's React Charts",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "react",
+    "charts",
+    "utils"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foo-software/foo-react-charts.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.3",
+    "react": "^17.0.1",
+    "typescript": "^4.2.3"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1"
+  }
+}

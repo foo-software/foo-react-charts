@@ -1,0 +1,56 @@
+{
+  "name": "@foo-software/react-charts-time-series",
+  "version": "0.0.1",
+  "author": "Adam Henson <adamhenson1979@gmail.com> (https://github.com/adamhenson)",
+  "description": "A time series chart component for React",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "react",
+    "charts",
+    "time series chart"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foo-software/foo-react-charts.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "jest": "jest",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "@foo-software/react-charts-utils": "^0.0.1",
+    "@types/d3-array": "^2.9.0",
+    "@types/d3-time-format": "^3.0.0",
+    "@visx/curve": "^1.7.0",
+    "@visx/event": "^1.7.0",
+    "@visx/gradient": "^1.7.0",
+    "@visx/grid": "^1.7.0",
+    "@visx/mock-data": "^1.7.0",
+    "@visx/responsive": "^1.7.0",
+    "@visx/scale": "^1.7.0",
+    "@visx/shape": "^1.7.0",
+    "@visx/tooltip": "^1.7.2",
+    "d3-array": "^2.12.0",
+    "d3-time-format": "^3.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^13.0.16",
+    "@types/jest": "^26.0.22",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.2",
+    "jest": "^26.6.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "ts-jest": "^26.5.4",
+    "typescript": "^4.2.3"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
