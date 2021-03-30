@@ -5,7 +5,10 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./packages/**/tsconfig.json,./packages/**/tsconfig.eslint.json",
+    "project": [
+      "./packages/**/tsconfig.json",
+      "./packages/**/tsconfig.eslint.json"
+    ],
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint", "jest"],
