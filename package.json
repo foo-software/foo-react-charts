@@ -6,7 +6,7 @@
     "charts"
   ],
   "scripts": {
-    "lint": "eslint --cache --fix",
+    "lint": "eslint ./packages/**/src --ext .ts,.tsx --cache --fix",
     "prettier": "prettier --single-quote --write './packages/**/*.{ts,tsx}'"
   },
   "husky": {
