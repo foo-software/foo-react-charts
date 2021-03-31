@@ -22,7 +22,7 @@ jobs:
           lerna bootstrap --hoist
       - name: Publish Packages
         run: |
-          node packages/ghost-graphql-ci-tools/dist/bin/config-git.js
+          node packages/react-charts-ci-tools/dist/bin/config-git.js
           node packages/react-charts-ci-tools/dist/bin/publish-packages.js
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
