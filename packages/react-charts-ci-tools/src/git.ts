@@ -2,7 +2,7 @@ import shell from './shell';
 
 const { PERSONAL_ACCESS_TOKEN: TOKEN } = process.env;
 
-const GIT_URL = `https://foo-software-bot:${TOKEN}@github.com/foo-software/react-charts`;
+const GIT_URL = `https://foo-software-bot:${TOKEN}@github.com/foo-software/foo-react-charts`;
 
 export const config = () => {
   shell('git config --global user.email notifications@foo.software');
