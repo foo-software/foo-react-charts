@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "composite": true,
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
@@ -15,14 +14,13 @@
     "noErrorTruncation": false,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
+    "outDir": "./dist",
     "pretty": true,
     "removeComments": false,
     "strict": true,
     "target": "es2015",
-    "types": ["node", "jest", "@testing-library/jest-dom"],
-    "typeRoots": ["./node_modules/@types", "./types"],
     "useDefineForClassFields": false
   },
   "exclude": ["dist", "node_modules"],
-  "include": ["**/*.ts", "**/*.d.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.stories.tsx"]
 }

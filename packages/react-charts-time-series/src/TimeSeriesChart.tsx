@@ -14,8 +14,10 @@ import { DateValue } from '@visx/mock-data/lib/generators/genDateValue';
 import { localPoint } from '@visx/event';
 import { max, extent, bisector } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
-import numberWithCommas from '../../helpers/numberWithCommas';
-import useRefWidth from '../../hooks/useRefWidth';
+import {
+  numberWithCommas,
+  useRefWidth,
+} from '@foo-software/react-charts-utils';
 
 // util
 const formatDate = timeFormat('%x %X');
