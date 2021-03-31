@@ -17,8 +17,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "jest": "jest",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "test": "jest"
   },
   "dependencies": {
     "@foo-software/react-charts-utils": "^0.0.1",
