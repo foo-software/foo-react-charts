@@ -1,23 +1,26 @@
-name: Test
+name: Publish
 on:
-  pull_request:
+  push:
     branches:
       - master
 
 jobs:
-  test:
+  publish:
     runs-on: ubuntu-latest
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@master
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+          scope: '@foo-software'
       - name: Install
         run: |
           npm install lerna -g
           lerna bootstrap --hoist
-      - name: Test
+      - name: Publish Packages
         run: |
-          cd packages/react-charts-time-series
-          npm run test
+          node packages/reach-charts-ci-tools/dist/bin/publish-packages.js
