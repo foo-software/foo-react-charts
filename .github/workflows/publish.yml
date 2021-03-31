@@ -23,4 +23,4 @@ jobs:
           lerna bootstrap --hoist
       - name: Publish Packages
         run: |
-          node packages/reach-charts-ci-tools/dist/bin/publish-packages.js
+          node packages/react-charts-ci-tools/dist/bin/publish-packages.js
