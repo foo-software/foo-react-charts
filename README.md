@@ -1,3 +1,7 @@
-# `@foo-software/react-charts`
+# React Charts
 
-**WIP** styled React chart components.
+Simple charts for React.
+
+# Packages
+
+- [`@foo-software/react-charts-time-series](./packages/react-charts-time-series)
