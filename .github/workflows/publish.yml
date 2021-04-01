@@ -8,6 +8,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@master
@@ -22,7 +23,6 @@ jobs:
           lerna bootstrap --hoist
       - name: Publish Packages
         run: |
+          cat .npmrc
           node packages/react-charts-ci-tools/dist/bin/config-git.js
           node packages/react-charts-ci-tools/dist/bin/publish-packages.js
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
