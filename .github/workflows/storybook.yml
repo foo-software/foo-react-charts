@@ -6,7 +6,7 @@ on:
       - master
     paths: [
       "packages/react-charts-styleguide/**",
-      "packages/react-charts-time-series/**",
+      "packages/react-charts-time-series/**"
     ]
 
 jobs:
