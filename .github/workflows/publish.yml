@@ -18,10 +18,9 @@ jobs:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
           scope: '@foo-software'
+          token: '${{ secrets.NPM_TOKEN }}'
       - name: Install
         run: |
-          node -v
-          ls
           npm install lerna -g
           lerna bootstrap --hoist
       - name: Publish Packages
