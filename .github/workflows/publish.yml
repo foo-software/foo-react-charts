@@ -25,6 +25,5 @@ jobs:
       - name: Publish Packages
         run: |
           echo '//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN  }}' > ${{ github.workspace }}/.npmrc
-          cat .npmrc
           node packages/react-charts-ci-tools/dist/bin/config-git.js
           node packages/react-charts-ci-tools/dist/bin/publish-packages.js
