@@ -1,6 +1,6 @@
 {
   "name": "@foo-software/react-charts-time-series",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Adam Henson <adamhenson1979@gmail.com> (https://github.com/adamhenson)",
   "description": "A time series chart component for React",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@foo-software/react-charts-utils": "^0.0.6",
+    "@foo-software/react-charts-utils": "^0.0.7",
     "@types/d3-array": "^2.9.0",
     "@types/d3-time-format": "^3.0.0",
     "@visx/curve": "^1.7.0",
