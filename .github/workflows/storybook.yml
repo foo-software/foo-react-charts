@@ -24,7 +24,7 @@ jobs:
           lerna bootstrap --hoist
           cd packages/react-charts-styleguide
           npm run build-storybook
-      - name: Deploy 🚀
+      - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
