@@ -1,6 +1,6 @@
 {
   "name": "@foo-software/react-charts-utils",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "author": "Adam Henson <adamhenson1979@gmail.com> (https://github.com/adamhenson)",
   "description": "Utility functions and hooks to use with Foo's React Charts",
   "license": "MIT",
