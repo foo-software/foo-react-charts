@@ -31,4 +31,4 @@ jobs:
           BRANCH: master
           FOLDER: packages/react-charts-styleguide/docs-build
           CLEAN: true
-          TARGET_FOLDER: packages/react-charts-styleguide/docs
+          TARGET_FOLDER: docs
