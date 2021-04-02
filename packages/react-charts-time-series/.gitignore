@@ -1,5 +1,0 @@
-*.DS_Store
-*.tsbuildinfo
-node_modules
-npm-debug.log
-dist
