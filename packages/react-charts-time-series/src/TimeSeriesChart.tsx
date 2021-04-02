@@ -33,14 +33,22 @@ type DataType = {
 };
 
 export type TimeSeriesChartProps = {
+  backgroundColor?: string;
+  borderRadius?: string;
   data: Array<DataType | DateValue>;
+  gutter?: { top: number; right: number; bottom: number; left: number };
   height: number;
   hideTooltip?: any;
-  margin?: { top: number; right: number; bottom: number; left: number };
-  primaryColor?: string;
-  secondaryColor?: string;
+  lineColor?: string;
+  markerLineColor?: string;
+  markerDotColor?: string;
+  markerDotBorderColor?: string;
   showTooltip?: any;
   tooltipData?: any;
+  tooltipPrimaryBackgroundColor?: string;
+  tooltipPrimaryTextColor?: string;
+  tooltipSecondaryBackgroundColor?: string;
+  tooltipSecondaryTextColor?: string;
   tooltipTop?: number;
   tooltipLeft?: number;
   valuePrefix?: string;
@@ -48,14 +56,22 @@ export type TimeSeriesChartProps = {
 
 export default withTooltip(
   ({
+    backgroundColor = 'transparent',
+    borderRadius = '0',
     data,
+    gutter = { top: 0, right: 0, bottom: 0, left: 0 },
     height,
     hideTooltip,
-    margin = { top: 0, right: 0, bottom: 0, left: 0 },
-    primaryColor = '#103EBF',
-    secondaryColor = '#58E3BE',
+    lineColor = '#103ebf',
+    markerLineColor = '#58e3Be',
+    markerDotColor = '#ffffff',
+    markerDotBorderColor = '#58e3Be',
     showTooltip,
     tooltipData,
+    tooltipPrimaryBackgroundColor = '#103ebf',
+    tooltipPrimaryTextColor = '#ffffff',
+    tooltipSecondaryBackgroundColor = '#ffffff',
+    tooltipSecondaryTextColor = '#103ebf',
     tooltipTop = 0,
     tooltipLeft = 0,
     valuePrefix = '',
@@ -64,26 +80,26 @@ export default withTooltip(
     const width = useRefWidth(containerRef);
 
     // bounds
-    const innerWidth = width - margin.left - margin.right;
-    const innerHeight = height - margin.top - margin.bottom;
+    const innerWidth = width - gutter.left - gutter.right;
+    const innerHeight = height - gutter.top - gutter.bottom;
 
     // scales
     const dateScale = useMemo(
       () =>
         scaleTime({
-          range: [margin.left, innerWidth + margin.left],
+          range: [gutter.left, innerWidth + gutter.left],
           domain: extent(data, getDate) as [Date, Date],
         }),
-      [innerWidth, margin.left],
+      [innerWidth, gutter.left],
     );
     const valueScale = useMemo(
       () =>
         scaleLinear({
-          range: [innerHeight + margin.top, margin.top],
+          range: [innerHeight + gutter.top, gutter.top],
           domain: [0, (max(data, getValue) || 0) + innerHeight / 3],
           nice: true,
         }),
-      [margin.top, innerHeight],
+      [gutter.top, innerHeight],
     );
 
     // tooltip handler
@@ -117,7 +133,16 @@ export default withTooltip(
     );
 
     return (
-      <div ref={containerRef} style={{ width: '100%', fontFamily: 'arial' }}>
+      <div
+        ref={containerRef}
+        style={{
+          background: backgroundColor,
+          boxSizing: 'border-box',
+          borderRadius,
+          width: '100%',
+          fontFamily: 'arial',
+        }}
+      >
         <svg width={width} height={height}>
           <rect fill="transparent" x={0} y={0} width={width} height={height} />
           <Area
@@ -126,13 +151,13 @@ export default withTooltip(
             y={(d) => valueScale(getValue(d)) ?? 0}
             fill="transparent"
             strokeWidth={2}
-            stroke={primaryColor}
+            stroke={lineColor}
             curve={curveMonotoneX}
           />
           <Bar
             data-testid="time-series-chart-bar"
-            x={margin.left}
-            y={margin.top}
+            x={gutter.left}
+            y={gutter.top}
             width={innerWidth}
             height={innerHeight}
             fill="transparent"
@@ -144,9 +169,9 @@ export default withTooltip(
           {tooltipData && (
             <g>
               <Line
-                from={{ x: tooltipLeft, y: margin.top }}
-                to={{ x: tooltipLeft, y: innerHeight + margin.top }}
-                stroke={secondaryColor}
+                from={{ x: tooltipLeft, y: gutter.top }}
+                to={{ x: tooltipLeft, y: innerHeight + gutter.top }}
+                stroke={markerLineColor}
                 strokeWidth={2}
                 pointerEvents="none"
                 strokeDasharray="5,2"
@@ -155,8 +180,8 @@ export default withTooltip(
                 cx={tooltipLeft}
                 cy={tooltipTop}
                 r={4}
-                fill="#ffffff"
-                stroke={secondaryColor}
+                fill={markerDotColor}
+                stroke={markerDotBorderColor}
                 strokeWidth={2}
                 pointerEvents="none"
               />
@@ -171,18 +196,19 @@ export default withTooltip(
               left={tooltipLeft + 12}
               style={{
                 ...defaultTooltipStyles,
-                background: primaryColor,
-                color: '#ffffff',
+                background: tooltipPrimaryBackgroundColor,
+                color: tooltipPrimaryTextColor,
               }}
             >
               {`${valuePrefix}${numberWithCommas(getValue(tooltipData))}`}
             </TooltipWithBounds>
             <Tooltip
-              top={innerHeight + margin.top - 14}
+              top={innerHeight + gutter.top - 14}
               left={tooltipLeft}
               style={{
                 ...defaultTooltipStyles,
-                color: primaryColor,
+                background: tooltipSecondaryBackgroundColor,
+                color: tooltipSecondaryTextColor,
                 minWidth: 150,
                 textAlign: 'center',
                 transform: 'translateX(-50%) translateY(105%)',

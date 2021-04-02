@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import genDateValue from '@visx/mock-data/lib/generators/genDateValue';
-import TimeSeriesChart from '@foo-software/react-charts-time-series';
+import TimeSeriesChart from '../../../react-charts-time-series/src/TimeSeriesChart';
 
 const mockData = genDateValue(100).reverse();
 
@@ -16,6 +16,17 @@ const Template: Story = (args: any) => (
 
 export const Default = Template.bind({});
 Default.args = {
+  backgroundColor: 'transparent',
+  borderRadius: '0',
+  gutter: { top: 0, right: 0, bottom: 0, left: 0 },
   height: 100,
+  lineColor: '#103ebf',
+  markerLineColor: '#58e3Be',
+  markerDotColor: '#ffffff',
+  markerDotBorderColor: '#58e3Be',
+  tooltipPrimaryBackgroundColor: '#103ebf',
+  tooltipPrimaryTextColor: '#ffffff',
+  tooltipSecondaryBackgroundColor: '#ffffff',
+  tooltipSecondaryTextColor: '#103ebf',
   valuePrefix: '$',
 };
