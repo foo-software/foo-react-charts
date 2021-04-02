@@ -1,4 +1,3 @@
-# inspired by https://dev.to/kouts/deploy-storybook-to-github-pages-3bij
 name: Storybook
 on:
   push:
@@ -25,10 +24,8 @@ jobs:
           cd packages/react-charts-styleguide
           npm run build-storybook
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@3.6.2
+        uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: master
-          FOLDER: packages/react-charts-styleguide/docs-build
-          CLEAN: true
-          TARGET_FOLDER: docs
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: packages/react-charts-styleguide/storybook-static
