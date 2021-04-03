@@ -19,6 +19,7 @@ Default.args = {
   backgroundColor: 'transparent',
   borderRadius: '0',
   gutter: { top: 0, right: 0, bottom: 0, left: 0 },
+  hasCurve: true,
   height: 100,
   lineColor: '#103ebf',
   markerLineColor: '#58e3Be',

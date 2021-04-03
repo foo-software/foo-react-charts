@@ -37,6 +37,7 @@ export type TimeSeriesChartProps = {
   borderRadius?: string;
   data: Array<DataType | DateValue>;
   gutter?: { top: number; right: number; bottom: number; left: number };
+  hasCurve?: boolean;
   height: number;
   hideTooltip?: any;
   lineColor?: string;
@@ -60,6 +61,7 @@ export default withTooltip(
     borderRadius = '0',
     data,
     gutter = { top: 0, right: 0, bottom: 0, left: 0 },
+    hasCurve = false,
     height,
     hideTooltip,
     lineColor = '#103ebf',
@@ -152,7 +154,7 @@ export default withTooltip(
             fill="transparent"
             strokeWidth={2}
             stroke={lineColor}
-            curve={curveMonotoneX}
+            curve={!hasCurve ? undefined : curveMonotoneX}
           />
           <Bar
             data-testid="time-series-chart-bar"
