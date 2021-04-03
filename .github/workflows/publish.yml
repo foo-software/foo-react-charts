@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      NPM_CONFIG_USERCONFIG: ${{ GITHUB_WORKSPACE }}
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node
@@ -20,3 +21,4 @@ jobs:
       - name: Publish Packages
         run: |
           echo $NPM_CONFIG_USERCONFIG
+          cat $NPM_CONFIG_USERCONFIG
