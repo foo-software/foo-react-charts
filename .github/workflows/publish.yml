@@ -20,5 +20,6 @@ jobs:
           scope: '@foo-software'
       - name: Publish Packages
         run: |
-          echo $NPM_CONFIG_USERCONFIG
-          cat $NPM_CONFIG_USERCONFIG
+          mv $NPM_CONFIG_USERCONFIG ${{ github.GITHUB_WORKSPACE }}/.npmrc
+          ls ${{ github.GITHUB_WORKSPACE }}
+          cat ${{ github.GITHUB_WORKSPACE }}/.npmrc
