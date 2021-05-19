@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-import DonutChart from '../../../react-charts-donut/src/DonutChart';
-import '../../../react-charts-donut/src/DonutChart.css';
+import DonutChart from '@foo-software/react-charts-donut';
+import '@foo-software/react-charts-donut/DonutChart.css';
 
 export default {
   title: 'Example/DonutChart',

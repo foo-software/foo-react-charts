@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@foo-software/react-charts-time-series": "^0.0.13",
+    "@foo-software/react-charts-donut": "^0.0.13",
     "@storybook/addon-actions": "^6.1.21",
     "@storybook/addon-essentials": "^6.1.21",
     "@storybook/addon-links": "^6.1.21",
