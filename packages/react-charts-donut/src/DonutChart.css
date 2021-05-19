@@ -1,4 +1,5 @@
 :root {
+  --donut-chart-color-orange: #ffa400;
   --donut-chart-color-red: #ff4e42;
   --donut-chart-color-fill: var(--donut-chart-color-green);
   --donut-chart-color-green: #0cce6b;
