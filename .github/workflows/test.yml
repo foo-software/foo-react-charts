@@ -15,9 +15,8 @@ jobs:
           node-version: '12.x'
       - name: Install
         run: |
-          npm install lerna -g
-          lerna bootstrap --hoist
+          npm ci
+          npm run lerna -- bootstrap --hoist
       - name: Test
         run: |
-          cd packages/react-charts-time-series
           npm run test

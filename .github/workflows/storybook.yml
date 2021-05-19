@@ -20,8 +20,8 @@ jobs:
           node-version: '12.x'
       - name: Install and Build
         run: |
-          npm install lerna -g
-          lerna bootstrap --hoist
+          npm ci
+          npm run lerna -- bootstrap --hoist
           cd packages/react-charts-styleguide
           npm run build-storybook
       - name: Deploy
