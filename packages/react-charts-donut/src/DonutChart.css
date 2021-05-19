@@ -1,0 +1,122 @@
+:root {
+  --donut-chart-color-red: #ff4e42;
+  --donut-chart-color-fill: var(--donut-chart-color-green);
+  --donut-chart-color-green: #0cce6b;
+  --donut-chart-container-padding: 8px;
+  --donut-chart-container-width: 148px;
+  --donut-chart-circle-border-width: 8;
+  --donut-chart-font-raleway: 'Raleway', system-ui, sans-serif;
+  --donut-chart-font-roboto-mono: 'Roboto Mono', monospace;
+  --donut-chart-gauge-circle-size: 80px;
+  --donut-chart-monospace-font-family: var(--donut-chart-font-roboto-mono);
+  --donut-chart-title-font-size: 20px;
+  --donut-chart-title-line-height: 26px;
+  --donut-chart-transition-length: 1s;
+}
+
+.donutChartRoot {
+  box-sizing: border-box;
+  width: var(--donut-chart-container-width);
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-decoration: none;
+  padding: var(--donut-chart-container-padding);
+  will-change: opacity;
+  color: var(--donut-chart-color-fill);
+  fill: var(--donut-chart-color-fill);
+  stroke: var(--donut-chart-color-fill);
+}
+
+.donutChartFluid {
+  --donut-chart-container-padding: 4px;
+  --donut-chart-container-width: 20%;
+  --donut-chart-circle-border-width: 4;
+  --donut-chart-gauge-circle-size: 36px;
+}
+
+.donutChart--small {
+  --donut-chart-container-padding: 8px;
+  --donut-chart-container-width: 100px;
+  --donut-chart-circle-border-width: 4;
+  --donut-chart-gauge-circle-size: 40px;
+  --donut-chart-title-font-size: 1rem;
+  --donut-chart-title-line-height: 1.2rem;
+}
+
+.donutChart--medium {
+  --donut-chart-container-padding: 8px;
+  --donut-chart-container-width: 120px;
+  --donut-chart-circle-border-width: 4;
+  --donut-chart-gauge-circle-size: 50px;
+  --donut-chart-title-font-size: 1rem;
+  --donut-chart-title-line-height: 1.2rem;
+}
+
+.donutChart--green {
+  --donut-chart-color-fill: var(--donut-chart-color-green);
+}
+
+.donutChart--orange {
+  --donut-chart-color-fill: var(--donut-chart-color-orange);
+}
+
+.donutChart--red {
+  --donut-chart-color-fill: var(--donut-chart-color-red);
+}
+
+.donutChart--grey {
+  --donut-chart-color-fill: var(--donut-chart-color-grey);
+}
+
+.donutChartContainer {
+  position: relative;
+  height: var(--donut-chart-gauge-circle-size);
+}
+
+.donutChartGauge {
+  stroke-linecap: round;
+  width: var(--donut-chart-gauge-circle-size);
+  height: var(--donut-chart-gauge-circle-size);
+}
+
+.donutChartGaugeBase {
+  opacity: 0.1;
+  stroke: var(--donut-chart-circle-fill);
+  stroke-width: var(--donut-chart-circle-border-width);
+}
+
+.donutChartGaugeArc {
+  fill: none;
+  stroke: var(--donut-chart-circle-color);
+  stroke-width: var(--donut-chart-circle-border-width);
+  animation: loadGaugeAnimation var(--donut-chart-transition-length) ease forwards;
+  animation-delay: 250ms;
+}
+
+.donutChartPercentage {
+  width: 100%;
+  height: var(--donut-chart-gauge-circle-size);
+  position: absolute;
+  font-family: var(--donut-chart-monospace-font-family);
+  font-size: calc(var(--donut-chart-gauge-circle-size) * 0.34 + 1.3px);
+  line-height: 0;
+  text-align: center;
+  top: calc(var(--donut-chart-container-padding) + var(--donut-chart-gauge-circle-size) / 2);
+}
+
+.donutChartLabel {
+  font-size: var(--donut-chart-title-font-size);
+  line-height: var(--donut-chart-title-line-height);
+  font-family: var(--donut-chart-font-raleway);
+  margin-top: 10px;
+  text-align: center;
+  color: #000000;
+}
+
+@keyframes loadGaugeAnimation {
+  0% {
+    stroke-dasharray: 0 352;
+  }
+}
