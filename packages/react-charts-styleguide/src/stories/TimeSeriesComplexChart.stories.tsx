@@ -10,10 +10,10 @@ export default {
 } as Meta;
 
 const mockData = [
-  ...getMockMonthData({ days: 31, month: 3 }),
-  ...getMockMonthData({ days: 30, month: 4 }),
-  ...getMockMonthData({ days: 31, month: 5 }),
-  ...getMockMonthData({ days: 30, month: 6 }),
+  ...getMockMonthData({ days: 31, month: 3, max: 85, min: 40 }),
+  ...getMockMonthData({ days: 30, month: 4, max: 85, min: 40 }),
+  ...getMockMonthData({ days: 31, month: 5, max: 94, min: 40 }),
+  ...getMockMonthData({ days: 30, month: 6, max: 99, min: 88 }),
 ];
 
 const Template: Story = (args: any) => (
