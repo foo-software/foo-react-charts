@@ -13,7 +13,7 @@ export const getMockMonthData = ({
       accessibility: getRandomNumber({ min: 85, max: 90 }),
       bestPractices: getRandomNumber({ min: 90, max: 95 }),
       date: new Date(`${month}/${index}/2021`),
-      performance: getRandomNumber({ min: 55, max: 90 }),
+      performance: getRandomNumber({ min: 30, max: 99 }),
       progressiveWebApp: 50,
       seo: getRandomNumber({ min: 70, max: 80 }),
     });

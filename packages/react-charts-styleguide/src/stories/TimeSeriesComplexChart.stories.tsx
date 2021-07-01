@@ -15,11 +15,35 @@ const mockData = [
   ...getMockMonthData({ days: 31, month: 5 }),
   ...getMockMonthData({ days: 30, month: 6 }),
 ];
-console.log('mockData', mockData);
 
 const Template: Story = (args: any) => (
   <TimeSeriesComplexChart {...args} data={mockData} />
 );
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  field: 'performance',
+  fillOpacity: 0.1,
+  hasGrid: false,
+  max: 100,
+  min: 0,
+  name: 'Performance',
+  ranges: [
+    {
+      max: 49,
+      min: 0,
+      color: '#ff1744',
+    },
+    {
+      max: 89,
+      min: 50,
+      color: '#f9a115',
+    },
+    {
+      max: 100,
+      min: 90,
+      color: '#31D3A5',
+    },
+  ],
+  strokeWidth: 3,
+};
