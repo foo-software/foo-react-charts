@@ -10,6 +10,7 @@ const TimeSeriesComplexChart = ({
   fillOpacity,
   hasGrid,
   hasAnnotations,
+  hasOnlyLastRange,
   height = '200px',
   max,
   min,
@@ -28,6 +29,7 @@ const TimeSeriesComplexChart = ({
   fillOpacity?: number;
   hasAnnotations?: boolean;
   hasGrid?: boolean;
+  hasOnlyLastRange?: boolean;
   height?: string;
   max?: number;
   min?: number;
@@ -45,6 +47,7 @@ const TimeSeriesComplexChart = ({
     fillOpacity,
     hasAnnotations,
     hasGrid,
+    hasOnlyLastRange,
     max,
     min,
     name,

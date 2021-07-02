@@ -75,6 +75,7 @@ export default ({
   fillOpacity = 0.1,
   hasAnnotations = false,
   hasGrid = false,
+  hasOnlyLastRange = false,
   ranges,
   name,
   max = 100,
@@ -91,6 +92,7 @@ export default ({
   fillOpacity?: number;
   hasAnnotations?: boolean;
   hasGrid?: boolean;
+  hasOnlyLastRange?: boolean;
   max?: number;
   min?: number;
   name: string;
@@ -126,6 +128,16 @@ export default ({
       colors[color] = am4core.color(color);
       chart.colors.list = [colors[color]];
     }
+
+    // if we only use the latest core color
+    const lastRangeColor = !hasOnlyLastRange
+      ? undefined
+      : getColor({
+          chartColors: chart.colors,
+          colors,
+          ranges: sortedRanges,
+          value: chart.data[chart.data.length - 1][field],
+        });
 
     // date axis
     const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
@@ -220,12 +232,15 @@ export default ({
       annotationBullet.adapter.add(
         'stroke',
         function (color: string, target: any) {
-          return getColor({
-            chartColors: chart.colors,
-            colors,
-            ranges: sortedRanges,
-            value: target?.tooltipDataItem?.valueY,
-          });
+          return (
+            lastRangeColor ||
+            getColor({
+              chartColors: chart.colors,
+              colors,
+              ranges: sortedRanges,
+              value: target?.tooltipDataItem?.valueY,
+            })
+          );
         },
       );
     }
@@ -235,7 +250,7 @@ export default ({
       const range = valueAxis.createSeriesRange(series);
       range.value = rangeData.max + Math.floor(strokeWidth / 2);
       range.endValue = rangeData.min;
-      range.contents.stroke = chart.colors.getIndex(index);
+      range.contents.stroke = lastRangeColor || chart.colors.getIndex(index);
       range.contents.fill = range.contents.stroke;
       range.contents.fillOpacity = fillOpacity;
     });
@@ -243,12 +258,14 @@ export default ({
     if (sortedRanges.length) {
       series.tooltip.getFillFromObject = false;
       series.tooltip.adapter.add('x', (x: any) => {
-        series.tooltip.background.fill = getColor({
-          chartColors: chart.colors,
-          colors,
-          ranges: sortedRanges,
-          value: series.tooltip.tooltipDataItem.valueY,
-        });
+        series.tooltip.background.fill =
+          lastRangeColor ||
+          getColor({
+            chartColors: chart.colors,
+            colors,
+            ranges: sortedRanges,
+            value: series.tooltip.tooltipDataItem.valueY,
+          });
         return x;
       });
     } else {
@@ -266,6 +283,7 @@ export default ({
     fillOpacity,
     hasAnnotations,
     hasGrid,
+    hasOnlyLastRange,
     max,
     min,
     name,

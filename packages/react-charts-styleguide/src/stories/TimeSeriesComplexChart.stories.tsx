@@ -27,6 +27,7 @@ Default.args = {
   fillOpacity: 0.1,
   hasAnnotations: true,
   hasGrid: false,
+  hasOnlyLastRange: false,
   max: 100,
   min: 0,
   name: 'Performance',
