@@ -1,5 +1,24 @@
+:root {
+  --time-series-complex-chart-font-raleway: 'Raleway', system-ui, sans-serif;
+  --time-series-complex-chart-font-roboto-mono: 'Roboto Mono', monospace;
+}
+
 .timeSeriesComplexChartRoot {
   position: relative;
+  font-family: var(--time-series-complex-chart-font-roboto-mono);
+}
+
+.timeSeriesComplexChartRoot__tooltip {
+  padding: 5px 0;
+}
+
+.timeSeriesComplexChartRoot__tooltipAnnotation {
+  font-family: var(--donut-chart-font-raleway);
+}
+
+.timeSeriesComplexChartRoot__tooltipValue {
+  margin-top: -6px;
+  font-size: 18px;
 }
 
 .timeSeriesComplexChartRoot::after {

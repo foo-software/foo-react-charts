@@ -3,6 +3,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import TimeSeriesComplexChart from '@foo-software/react-charts-time-series-complex';
 import '@foo-software/react-charts-time-series-complex/dist/TimeSeriesComplexChart.css';
 import { getMockMonthData } from './helpers/lighthouse';
+import './TimeSeriesComplexChart.css';
 
 export default {
   title: 'Example/TimeSeriesComplexChart',
@@ -17,17 +18,20 @@ const mockData = [
 ];
 
 const Template: Story = (args: any) => (
-  <TimeSeriesComplexChart {...args} data={mockData} />
+  <TimeSeriesComplexChart {...args} className="chart" data={mockData} />
 );
 
 export const Default = Template.bind({});
 Default.args = {
+  annotationBulletRadius: 4,
+  annotationBulletStrokeWidth: 3,
   dateMinGridDistance: 50,
   field: 'performance',
   fillOpacity: 0.1,
   hasAnnotations: true,
   hasGrid: false,
   hasOnlyLastRange: false,
+  onClick: (data: any) => alert(`Performance: ${data.performance}`),
   max: 100,
   min: 0,
   name: 'Performance',
@@ -49,7 +53,7 @@ Default.args = {
     },
   ],
   strokeWidth: 3,
-  tooltipClassName: 'time-series-complex-chart__tooltip',
-  tooltipValueClassName: 'time-series-complex-chart__tooltip-value',
-  tooltipAnnotationClassName: 'time-series-complex-chart__tooltip-annotation',
+  tooltipClassName: 'timeSeriesComplexChartRoot__tooltip',
+  tooltipValueClassName: 'timeSeriesComplexChartRoot__tooltipValue',
+  tooltipAnnotationClassName: 'timeSeriesComplexChartRoot__tooltipAnnotation',
 };

@@ -68,6 +68,8 @@ const getColor = ({
 };
 
 export default ({
+  annotationBulletRadius = 4,
+  annotationBulletStrokeWidth = 3,
   color,
   data,
   dateMinGridDistance = 50,
@@ -76,15 +78,18 @@ export default ({
   hasAnnotations = false,
   hasGrid = false,
   hasOnlyLastRange = false,
+  onClick,
   ranges,
   name,
   max = 100,
   min = 0,
   strokeWidth = 3,
-  tooltipClassName = 'time-series-complex-chart__tooltip',
-  tooltipValueClassName = 'time-series-complex-chart__tooltip-value',
-  tooltipAnnotationClassName = 'time-series-complex-chart__tooltip-annotation',
+  tooltipClassName = 'timeSeriesComplexChartRoot__tooltip',
+  tooltipValueClassName = 'timeSeriesComplexChartRoot__tooltipValue',
+  tooltipAnnotationClassName = 'timeSeriesComplexChartRoot__tooltipAnnotation',
 }: {
+  annotationBulletRadius?: number;
+  annotationBulletStrokeWidth?: number;
   color?: string;
   data: any;
   dateMinGridDistance?: number;
@@ -96,6 +101,7 @@ export default ({
   max?: number;
   min?: number;
   name: string;
+  onClick?: (data: any) => any;
   ranges?: Range[];
   strokeWidth?: number;
   tooltipClassName?: string;
@@ -166,6 +172,7 @@ export default ({
 
     // value axis
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.cursorTooltipEnabled = false;
     valueAxis.min = min;
     valueAxis.max = max;
     valueAxis.renderer.disabled = false;
@@ -215,8 +222,8 @@ export default ({
         new am4charts.CircleBullet(),
       );
       annotationBullet.circle.fill = am4core.color('#fff');
-      annotationBullet.circle.strokeWidth = 2;
-      annotationBullet.circle.radius = 4;
+      annotationBullet.circle.strokeWidth = annotationBulletStrokeWidth;
+      annotationBullet.circle.radius = annotationBulletRadius;
 
       const annotationState = annotationBullet.states.create('hover');
       annotationState.properties.scale = 1.2;
@@ -272,12 +279,21 @@ export default ({
       series.tooltip.background.fill = chart.colors.getIndex(0);
     }
 
+    // events
+    if (typeof onClick === 'function') {
+      chart.events.on('hit', () => {
+        onClick(series.tooltipDataItem.dataContext);
+      });
+    }
+
     return () => {
       if (chart) {
         chart.dispose();
       }
     };
   }, [
+    annotationBulletRadius,
+    annotationBulletStrokeWidth,
     dateMinGridDistance,
     field,
     fillOpacity,
@@ -287,6 +303,7 @@ export default ({
     max,
     min,
     name,
+    onClick,
     ranges,
     strokeWidth,
     tooltipClassName,

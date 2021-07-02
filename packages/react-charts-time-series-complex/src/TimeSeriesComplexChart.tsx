@@ -1,8 +1,10 @@
 import React from 'react';
 import classnames from 'classnames';
-import useScores, { Range } from './useScores';
+import useAmChart, { Range } from './useAmChart';
 
 const TimeSeriesComplexChart = ({
+  annotationBulletRadius,
+  annotationBulletStrokeWidth,
   className,
   data,
   dateMinGridDistance,
@@ -15,12 +17,15 @@ const TimeSeriesComplexChart = ({
   max,
   min,
   name,
+  onClick,
   ranges,
   strokeWidth,
   tooltipClassName = 'time-series-complex-chart__tooltip',
   tooltipValueClassName = 'time-series-complex-chart__tooltip-value',
   tooltipAnnotationClassName = 'time-series-complex-chart__tooltip-annotation',
 }: {
+  annotationBulletRadius?: number;
+  annotationBulletStrokeWidth?: number;
   color?: string;
   className?: string;
   data: any;
@@ -34,13 +39,16 @@ const TimeSeriesComplexChart = ({
   max?: number;
   min?: number;
   name: string;
+  onClick?: (data: any) => any;
   ranges?: Range[];
   strokeWidth?: number;
   tooltipClassName?: string;
   tooltipValueClassName?: string;
   tooltipAnnotationClassName?: string;
 }) => {
-  useScores({
+  useAmChart({
+    annotationBulletRadius,
+    annotationBulletStrokeWidth,
     data,
     dateMinGridDistance,
     field,
@@ -51,6 +59,7 @@ const TimeSeriesComplexChart = ({
     max,
     min,
     name,
+    onClick,
     ranges,
     strokeWidth,
     tooltipClassName,
