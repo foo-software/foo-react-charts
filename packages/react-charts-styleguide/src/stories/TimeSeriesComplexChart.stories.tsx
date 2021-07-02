@@ -22,8 +22,10 @@ const Template: Story = (args: any) => (
 
 export const Default = Template.bind({});
 Default.args = {
+  dateMinGridDistance: 50,
   field: 'performance',
   fillOpacity: 0.1,
+  hasAnnotations: true,
   hasGrid: false,
   max: 100,
   min: 0,
@@ -46,4 +48,7 @@ Default.args = {
     },
   ],
   strokeWidth: 3,
+  tooltipClassName: 'time-series-complex-chart__tooltip',
+  tooltipValueClassName: 'time-series-complex-chart__tooltip-value',
+  tooltipAnnotationClassName: 'time-series-complex-chart__tooltip-annotation',
 };

@@ -1,3 +1,5 @@
+export const coinFlip = (percent: number) => Math.random() < percent / 100;
+
 // between 1 and the `max` argument
 export const getRandomNumber = ({
   min = 1,

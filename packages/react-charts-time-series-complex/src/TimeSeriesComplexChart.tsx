@@ -1,25 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import useScores, { Range } from './useScores';
 
 const TimeSeriesComplexChart = ({
   className,
   data,
+  dateMinGridDistance,
   field,
   fillOpacity,
   hasGrid,
+  hasAnnotations,
   height = '200px',
   max,
   min,
   name,
   ranges,
   strokeWidth,
+  tooltipClassName = 'time-series-complex-chart__tooltip',
+  tooltipValueClassName = 'time-series-complex-chart__tooltip-value',
+  tooltipAnnotationClassName = 'time-series-complex-chart__tooltip-annotation',
 }: {
   color?: string;
   className?: string;
   data: any;
+  dateMinGridDistance?: number;
   field: string;
   fillOpacity?: number;
+  hasAnnotations?: boolean;
   hasGrid?: boolean;
   height?: string;
   max?: number;
@@ -27,21 +34,25 @@ const TimeSeriesComplexChart = ({
   name: string;
   ranges?: Range[];
   strokeWidth?: number;
+  tooltipClassName?: string;
+  tooltipValueClassName?: string;
+  tooltipAnnotationClassName?: string;
 }) => {
-  const [shouldRedraw, setShouldRedraw] = useState(false);
-
   useScores({
     data,
+    dateMinGridDistance,
     field,
     fillOpacity,
+    hasAnnotations,
     hasGrid,
     max,
     min,
     name,
     ranges,
-    setShouldRedraw,
-    shouldRedraw,
     strokeWidth,
+    tooltipClassName,
+    tooltipValueClassName,
+    tooltipAnnotationClassName,
   });
 
   return (

@@ -47,37 +47,64 @@ const getValidRanges = ({
   return ranges.filter((range) => !invalidColors.includes(range.color));
 };
 
+const getColor = ({
+  chartColors,
+  colors,
+  ranges,
+  value,
+}: {
+  chartColors: any;
+  colors: any;
+  ranges: any[];
+  value: number;
+}) => {
+  const reverseSortedRanges = [...ranges].reverse();
+  for (const range of reverseSortedRanges) {
+    if (value <= range.max && value >= range.min) {
+      return colors[range.color];
+    }
+  }
+  return chartColors.getIndex(0);
+};
+
 export default ({
   color,
   data,
+  dateMinGridDistance = 50,
   field,
   fillOpacity = 0.1,
+  hasAnnotations = false,
   hasGrid = false,
   ranges,
   name,
   max = 100,
   min = 0,
-  setShouldRedraw,
-  shouldRedraw,
   strokeWidth = 3,
+  tooltipClassName = 'time-series-complex-chart__tooltip',
+  tooltipValueClassName = 'time-series-complex-chart__tooltip-value',
+  tooltipAnnotationClassName = 'time-series-complex-chart__tooltip-annotation',
 }: {
   color?: string;
   data: any;
+  dateMinGridDistance?: number;
   field: string;
   fillOpacity?: number;
+  hasAnnotations?: boolean;
   hasGrid?: boolean;
   max?: number;
   min?: number;
   name: string;
   ranges?: Range[];
-  setShouldRedraw: (shouldRedraw: boolean) => void;
-  shouldRedraw: boolean;
   strokeWidth?: number;
+  tooltipClassName?: string;
+  tooltipValueClassName?: string;
+  tooltipAnnotationClassName?: string;
 }) => {
   useEffect(() => {
     // https://www.amcharts.com/docs/v4/reference/xychart/
     const chart = am4core.create('chartdiv', am4charts.XYChart);
     chart.data = data;
+    chart.maskBullets = false;
 
     const validRanges = getValidRanges({
       data: chart.data,
@@ -85,9 +112,11 @@ export default ({
       ranges,
     });
 
+    // sort ranges by `min`
     const sortedRanges = validRanges.sort((a, b) => a.min - b.min);
-    const colors: any = {};
 
+    // create a dictoonary of colors for quick lookup
+    const colors: any = {};
     if (sortedRanges.length) {
       chart.colors.list = sortedRanges.map((range) => {
         colors[range.color] = am4core.color(range.color);
@@ -98,9 +127,10 @@ export default ({
       chart.colors.list = [colors[color]];
     }
 
+    // date axis
     const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-    dateAxis.renderer.minGridDistance = 50;
-
+    dateAxis.renderer.minGridDistance = dateMinGridDistance;
+    dateAxis.renderer.grid.template.disabled = !hasGrid;
     dateAxis.startLocation = 0.5;
     dateAxis.endLocation = 0.5;
 
@@ -118,24 +148,89 @@ export default ({
     dateAxis.dateFormats.setKey('month', 'M/d');
     dateAxis.periodChangeDateFormats.setKey('month', 'M/d');
 
-    dateAxis.renderer.grid.template.disabled = !hasGrid;
+    // cursor
+    chart.cursor = new am4charts.XYCursor();
+    chart.cursor.xAxis = dateAxis;
 
+    // value axis
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.min = min;
     valueAxis.max = max;
     valueAxis.renderer.disabled = false;
     valueAxis.renderer.grid.template.disabled = !hasGrid;
 
+    // series
     const series: any = chart.series.push(new am4charts.LineSeries());
     series.dataFields.valueY = field;
     series.dataFields.dateX = 'date';
     series.yAxis = valueAxis;
     series.name = name;
-    series.tooltipText = '{valueY}';
     series.strokeWidth = strokeWidth;
     series.fillOpacity = fillOpacity;
 
-    // range
+    // tooltip
+    const openingTooltipTag = `<div class="${tooltipClassName}">`;
+    const closingTooltipTag = '</div>';
+    const openingTooltipValueTag = `<div class="${tooltipValueClassName}">`;
+    const closingTooltipValueTag = '</div>';
+    series.tooltipHTML =
+      `${openingTooltipTag}${openingTooltipValueTag}` +
+      `{valueY}${closingTooltipValueTag}${closingTooltipTag}`;
+
+    if (hasAnnotations) {
+      series.adapter.add('tooltipHTML', (html: string, target: any) => {
+        const annotation = target?.tooltipDataItem?.dataContext?.annotation;
+
+        if (!annotation) {
+          return html;
+        }
+
+        const openingTooltipAnnotationTag = `<div class="${tooltipAnnotationClassName}">`;
+        const closingTooltipAnnotationTag = '</div>';
+
+        return (
+          `${openingTooltipTag}` +
+          `${openingTooltipValueTag}{valueY}${closingTooltipValueTag}` +
+          `${openingTooltipAnnotationTag}{annotation}${closingTooltipAnnotationTag}` +
+          `${closingTooltipTag}`
+        );
+      });
+    }
+
+    // bullets
+    if (hasAnnotations) {
+      const annotationBullet = series.bullets.push(
+        new am4charts.CircleBullet(),
+      );
+      annotationBullet.circle.fill = am4core.color('#fff');
+      annotationBullet.circle.strokeWidth = 2;
+      annotationBullet.circle.radius = 4;
+
+      const annotationState = annotationBullet.states.create('hover');
+      annotationState.properties.scale = 1.2;
+
+      annotationBullet.adapter.add(
+        'disabled',
+        (disabled: boolean, target: any) => {
+          const annotation = target?.tooltipDataItem?.dataContext?.annotation;
+          return !annotation;
+        },
+      );
+
+      annotationBullet.adapter.add(
+        'stroke',
+        function (color: string, target: any) {
+          return getColor({
+            chartColors: chart.colors,
+            colors,
+            ranges: sortedRanges,
+            value: target?.tooltipDataItem?.valueY,
+          });
+        },
+      );
+    }
+
+    // ranges
     sortedRanges.forEach((rangeData, index) => {
       const range = valueAxis.createSeriesRange(series);
       range.value = rangeData.max + Math.floor(strokeWidth / 2);
@@ -145,34 +240,19 @@ export default ({
       range.contents.fillOpacity = fillOpacity;
     });
 
-    // cursor
-    chart.cursor = new am4charts.XYCursor();
-    chart.cursor.xAxis = dateAxis;
-
     if (sortedRanges.length) {
       series.tooltip.getFillFromObject = false;
       series.tooltip.adapter.add('x', (x: any) => {
-        const reverseSortedRanges = [...sortedRanges].reverse();
-        for (const range of reverseSortedRanges) {
-          if (
-            series.tooltip.tooltipDataItem.valueY <= range.max &&
-            series.tooltip.tooltipDataItem.valueY >= range.min
-          ) {
-            series.tooltip.background.fill = colors[range.color];
-            return x;
-          }
-        }
-        series.tooltip.background.fill = chart.colors.getIndex(0);
+        series.tooltip.background.fill = getColor({
+          chartColors: chart.colors,
+          colors,
+          ranges: sortedRanges,
+          value: series.tooltip.tooltipDataItem.valueY,
+        });
         return x;
       });
     } else {
       series.tooltip.background.fill = chart.colors.getIndex(0);
-    }
-
-    // if we received a signal to redraw
-    if (shouldRedraw) {
-      chart.invalidateData();
-      setShouldRedraw(false);
     }
 
     return () => {
@@ -180,5 +260,19 @@ export default ({
         chart.dispose();
       }
     };
-  }, [shouldRedraw]);
+  }, [
+    dateMinGridDistance,
+    field,
+    fillOpacity,
+    hasAnnotations,
+    hasGrid,
+    max,
+    min,
+    name,
+    ranges,
+    strokeWidth,
+    tooltipClassName,
+    tooltipValueClassName,
+    tooltipAnnotationClassName,
+  ]);
 };
