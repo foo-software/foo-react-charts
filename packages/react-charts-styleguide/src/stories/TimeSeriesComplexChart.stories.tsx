@@ -13,10 +13,6 @@ export default {
 
 const mockData = [
   ...getMockMonthData({
-    annotations: [
-      'Hello world. This is an annotation',
-      'This is another annotation',
-    ],
     customFields: {
       id: 'abcd',
     },
@@ -28,10 +24,6 @@ const mockData = [
     year: '2021',
   }),
   ...getMockMonthData({
-    annotations: [
-      'Hello world. This is an annotation',
-      'This is another annotation',
-    ],
     customFields: {
       id: 'abcd',
     },
@@ -43,10 +35,6 @@ const mockData = [
     year: '2021',
   }),
   ...getMockMonthData({
-    annotations: [
-      'Hello world. This is an annotation',
-      'This is another annotation',
-    ],
     customFields: {
       id: 'abcd',
     },
@@ -58,10 +46,6 @@ const mockData = [
     year: '2021',
   }),
   ...getMockMonthData({
-    annotations: [
-      'Hello world. This is an annotation',
-      'This is another annotation',
-    ],
     customFields: {
       id: 'abcd',
     },
