@@ -8,7 +8,7 @@
     "isolatedModules": false,
     "jsx": "react",
     "lib": ["dom", "esnext"],
-    "module": "commonjs",
+    "module": "es6",
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noErrorTruncation": false,
@@ -18,7 +18,7 @@
     "pretty": true,
     "removeComments": false,
     "strict": true,
-    "target": "es2015",
+    "target": "es6",
     "useDefineForClassFields": false
   },
   "exclude": ["dist", "node_modules", "**/*.test.ts", "**/*.test.tsx"],
