@@ -81,6 +81,7 @@ Default.args = {
   max: 100,
   min: 0,
   name: 'Performance',
+  padding: 8,
   ranges: [
     {
       max: 49,

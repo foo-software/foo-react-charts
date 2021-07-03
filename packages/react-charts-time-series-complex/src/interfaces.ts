@@ -31,6 +31,7 @@ export interface TimeSeriesComplexChartPropsInterface {
   min?: number;
   name: string;
   onClick?: (data: any) => any;
+  padding?: number;
   ranges?: RangeInterface[];
   refreshId?: string;
   strokeWidth?: number;

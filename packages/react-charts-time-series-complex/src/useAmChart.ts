@@ -62,7 +62,7 @@ const getColor = ({
   return chartColors.getIndex(0);
 };
 
-export default ({
+const useAmChart = ({
   annotationBulletRadius = 4,
   annotationBulletStrokeWidth = 3,
   chartId,
@@ -81,6 +81,7 @@ export default ({
   name,
   max = 100,
   min = 0,
+  padding = 8,
   ranges,
   refreshId,
   strokeWidth = 3,
@@ -106,6 +107,7 @@ export default ({
   min?: number;
   name: string;
   onClick?: (data: any) => any;
+  padding?: number;
   ranges?: RangeInterface[];
   refreshId?: string;
   strokeWidth?: number;
@@ -118,6 +120,10 @@ export default ({
     const chart = am4core.create(chartId, am4charts.XYChart);
     chart.data = data;
     chart.maskBullets = false;
+    chart.paddingTop = padding;
+    chart.paddingBottom = padding;
+    chart.paddingLeft = padding;
+    chart.paddingRight = padding;
 
     const validRanges = getValidRanges({
       data: chart.data,
@@ -315,6 +321,7 @@ export default ({
     min,
     name,
     onClick,
+    padding,
     ranges,
     refreshId,
     strokeWidth,
@@ -323,3 +330,5 @@ export default ({
     tooltipAnnotationClassName,
   ]);
 };
+
+export default useAmChart;
