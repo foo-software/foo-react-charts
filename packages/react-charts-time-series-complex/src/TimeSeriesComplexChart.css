@@ -21,13 +21,7 @@
   font-size: 18px;
 }
 
-.timeSeriesComplexChartRoot::after {
-  content: '';
-  width: 70px;
-  height: 25px;
-  display: block;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: #ffffff;
+/* gotta find a better way :( */
+.timeSeriesComplexChartRoot [aria-labelledby] {
+  display: none;
 }

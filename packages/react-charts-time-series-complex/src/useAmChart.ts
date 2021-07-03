@@ -76,8 +76,12 @@ export default ({
   field,
   fillOpacity = 0.1,
   hasAnnotations = false,
+  hasBaseGrid = false,
   hasGrid = false,
   hasOnlyLastRange = false,
+  hasXAxis = true,
+  hasYAxis = true,
+  id,
   onClick,
   ranges,
   name,
@@ -96,8 +100,12 @@ export default ({
   field: string;
   fillOpacity?: number;
   hasAnnotations?: boolean;
+  hasBaseGrid?: boolean;
   hasGrid?: boolean;
   hasOnlyLastRange?: boolean;
+  hasXAxis?: boolean;
+  hasYAxis?: boolean;
+  id?: string;
   max?: number;
   min?: number;
   name: string;
@@ -113,6 +121,7 @@ export default ({
     const chart = am4core.create('chartdiv', am4charts.XYChart);
     chart.data = data;
     chart.maskBullets = false;
+    console.log('chart', chart);
 
     const validRanges = getValidRanges({
       data: chart.data,
@@ -147,6 +156,7 @@ export default ({
 
     // date axis
     const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    dateAxis.renderer.disabled = !hasXAxis;
     dateAxis.renderer.minGridDistance = dateMinGridDistance;
     dateAxis.renderer.grid.template.disabled = !hasGrid;
     dateAxis.startLocation = 0.5;
@@ -172,10 +182,11 @@ export default ({
 
     // value axis
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.renderer.disabled = !hasYAxis;
     valueAxis.cursorTooltipEnabled = false;
+    valueAxis.renderer.baseGrid.disabled = !hasBaseGrid;
     valueAxis.min = min;
     valueAxis.max = max;
-    valueAxis.renderer.disabled = false;
     valueAxis.renderer.grid.template.disabled = !hasGrid;
 
     // series
@@ -298,8 +309,12 @@ export default ({
     field,
     fillOpacity,
     hasAnnotations,
+    hasBaseGrid,
     hasGrid,
     hasOnlyLastRange,
+    hasXAxis,
+    hasYAxis,
+    id,
     max,
     min,
     name,
