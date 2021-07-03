@@ -7,14 +7,9 @@ import { useEffect } from 'react';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themesAnimated from '@amcharts/amcharts4/themes/animated';
+import { RangeInterface } from './interfaces';
 
 am4core.useTheme(am4themesAnimated);
-
-export interface Range {
-  max: number;
-  min: number;
-  color: string;
-}
 
 const getValidRanges = ({
   data,
@@ -23,7 +18,7 @@ const getValidRanges = ({
 }: {
   data: any;
   field: string;
-  ranges?: Range[];
+  ranges?: RangeInterface[];
 }) => {
   if (!ranges || !Array.isArray(ranges) || !ranges.length) {
     return [];
@@ -110,7 +105,7 @@ export default ({
   min?: number;
   name: string;
   onClick?: (data: any) => any;
-  ranges?: Range[];
+  ranges?: RangeInterface[];
   strokeWidth?: number;
   tooltipClassName?: string;
   tooltipValueClassName?: string;
@@ -121,7 +116,6 @@ export default ({
     const chart = am4core.create('chartdiv', am4charts.XYChart);
     chart.data = data;
     chart.maskBullets = false;
-    console.log('chart', chart);
 
     const validRanges = getValidRanges({
       data: chart.data,

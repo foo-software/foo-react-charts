@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
-import useAmChart, { Range } from './useAmChart';
+import useAmChart from './useAmChart';
+import { TimeSeriesComplexChartPropsInterface } from './interfaces';
 
 const TimeSeriesComplexChart = ({
   annotationBulletRadius,
@@ -27,33 +28,7 @@ const TimeSeriesComplexChart = ({
   tooltipClassName,
   tooltipValueClassName,
   tooltipAnnotationClassName,
-}: {
-  annotationBulletRadius?: number;
-  annotationBulletStrokeWidth?: number;
-  color?: string;
-  className?: string;
-  data: any;
-  dateMinGridDistance?: number;
-  field: string;
-  fillOpacity?: number;
-  hasAnnotations?: boolean;
-  hasBaseGrid?: boolean;
-  hasGrid?: boolean;
-  hasOnlyLastRange?: boolean;
-  hasXAxis?: boolean;
-  hasYAxis?: boolean;
-  height?: string;
-  id?: string;
-  max?: number;
-  min?: number;
-  name: string;
-  onClick?: (data: any) => any;
-  ranges?: Range[];
-  strokeWidth?: number;
-  tooltipClassName?: string;
-  tooltipValueClassName?: string;
-  tooltipAnnotationClassName?: string;
-}) => {
+}: TimeSeriesComplexChartPropsInterface) => {
   useAmChart({
     annotationBulletRadius,
     annotationBulletStrokeWidth,
