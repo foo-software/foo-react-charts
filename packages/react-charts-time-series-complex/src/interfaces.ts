@@ -13,6 +13,7 @@ export interface TimeSeriesComplexChartDataInterface {
 export interface TimeSeriesComplexChartPropsInterface {
   annotationBulletRadius?: number;
   annotationBulletStrokeWidth?: number;
+  chartId: string;
   color?: string;
   className?: string;
   data: TimeSeriesComplexChartDataInterface[];
@@ -26,12 +27,12 @@ export interface TimeSeriesComplexChartPropsInterface {
   hasXAxis?: boolean;
   hasYAxis?: boolean;
   height?: string;
-  id?: string;
   max?: number;
   min?: number;
   name: string;
   onClick?: (data: any) => any;
   ranges?: RangeInterface[];
+  refreshId?: string;
   strokeWidth?: number;
   tooltipClassName?: string;
   tooltipValueClassName?: string;

@@ -7,6 +7,7 @@ const TimeSeriesComplexChart = ({
   annotationBulletRadius,
   annotationBulletStrokeWidth,
   className,
+  chartId,
   data,
   dateMinGridDistance,
   field,
@@ -18,12 +19,12 @@ const TimeSeriesComplexChart = ({
   hasXAxis,
   hasYAxis,
   height = '200px',
-  id,
   max,
   min,
   name,
   onClick,
   ranges,
+  refreshId,
   strokeWidth,
   tooltipClassName,
   tooltipValueClassName,
@@ -32,6 +33,7 @@ const TimeSeriesComplexChart = ({
   useAmChart({
     annotationBulletRadius,
     annotationBulletStrokeWidth,
+    chartId,
     data,
     dateMinGridDistance,
     field,
@@ -42,12 +44,12 @@ const TimeSeriesComplexChart = ({
     hasOnlyLastRange,
     hasXAxis,
     hasYAxis,
-    id,
     max,
     min,
     name,
     onClick,
     ranges,
+    refreshId,
     strokeWidth,
     tooltipClassName,
     tooltipValueClassName,
@@ -56,7 +58,7 @@ const TimeSeriesComplexChart = ({
 
   return (
     <div
-      id="chartdiv"
+      id={chartId}
       className={classnames('timeSeriesComplexChartRoot', className)}
       style={{ height }}
     />

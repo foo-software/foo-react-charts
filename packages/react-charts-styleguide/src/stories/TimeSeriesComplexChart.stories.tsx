@@ -66,6 +66,7 @@ export const Default = Template.bind({});
 Default.args = {
   annotationBulletRadius: 4,
   annotationBulletStrokeWidth: 3,
+  chartId: 'myChart',
   dateMinGridDistance: 50,
   field: 'performance',
   fillOpacity: 0.1,
@@ -76,7 +77,6 @@ Default.args = {
   hasXAxis: true,
   hasYAxis: true,
   height: '200px',
-  id: 'myIdToTriggerRerenderWhenChangedOtherwiseNoNeedForIt',
   onClick: (data: any) => alert(`Performance: ${data.performance}`),
   max: 100,
   min: 0,
@@ -98,6 +98,7 @@ Default.args = {
       color: '#31D3A5',
     },
   ],
+  refreshId: 'myIdToTriggerRerenderWhenChangedOtherwiseNoNeedForIt',
   strokeWidth: 3,
   tooltipClassName: 'timeSeriesComplexChartRoot__tooltip',
   tooltipValueClassName: 'timeSeriesComplexChartRoot__tooltipValue',

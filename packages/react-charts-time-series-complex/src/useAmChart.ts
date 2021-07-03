@@ -65,6 +65,7 @@ const getColor = ({
 export default ({
   annotationBulletRadius = 4,
   annotationBulletStrokeWidth = 3,
+  chartId,
   color,
   data,
   dateMinGridDistance = 50,
@@ -76,12 +77,12 @@ export default ({
   hasOnlyLastRange = false,
   hasXAxis = true,
   hasYAxis = true,
-  id,
   onClick,
-  ranges,
   name,
   max = 100,
   min = 0,
+  ranges,
+  refreshId,
   strokeWidth = 3,
   tooltipClassName = 'timeSeriesComplexChartRoot__tooltip',
   tooltipValueClassName = 'timeSeriesComplexChartRoot__tooltipValue',
@@ -89,6 +90,7 @@ export default ({
 }: {
   annotationBulletRadius?: number;
   annotationBulletStrokeWidth?: number;
+  chartId: string;
   color?: string;
   data: any;
   dateMinGridDistance?: number;
@@ -100,12 +102,12 @@ export default ({
   hasOnlyLastRange?: boolean;
   hasXAxis?: boolean;
   hasYAxis?: boolean;
-  id?: string;
   max?: number;
   min?: number;
   name: string;
   onClick?: (data: any) => any;
   ranges?: RangeInterface[];
+  refreshId?: string;
   strokeWidth?: number;
   tooltipClassName?: string;
   tooltipValueClassName?: string;
@@ -113,7 +115,7 @@ export default ({
 }) => {
   useEffect(() => {
     // https://www.amcharts.com/docs/v4/reference/xychart/
-    const chart = am4core.create('chartdiv', am4charts.XYChart);
+    const chart = am4core.create(chartId, am4charts.XYChart);
     chart.data = data;
     chart.maskBullets = false;
 
@@ -299,6 +301,7 @@ export default ({
   }, [
     annotationBulletRadius,
     annotationBulletStrokeWidth,
+    chartId,
     dateMinGridDistance,
     field,
     fillOpacity,
@@ -308,12 +311,12 @@ export default ({
     hasOnlyLastRange,
     hasXAxis,
     hasYAxis,
-    id,
     max,
     min,
     name,
     onClick,
     ranges,
+    refreshId,
     strokeWidth,
     tooltipClassName,
     tooltipValueClassName,
