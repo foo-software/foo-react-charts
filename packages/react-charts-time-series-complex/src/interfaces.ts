@@ -15,7 +15,7 @@ export interface TimeSeriesComplexChartPropsInterface {
   annotationBulletStrokeWidth?: number;
   color?: string;
   className?: string;
-  data: TimeSeriesComplexChartDataInterface;
+  data: TimeSeriesComplexChartDataInterface[];
   dateMinGridDistance?: number;
   field: string;
   fillOpacity?: number;
