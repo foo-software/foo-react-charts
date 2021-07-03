@@ -1,8 +1,9 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-import TimeSeriesComplexChart from '@foo-software/react-charts-time-series-complex';
+import TimeSeriesComplexChart, {
+  getMockMonthData,
+} from '@foo-software/react-charts-time-series-complex';
 import '@foo-software/react-charts-time-series-complex/dist/TimeSeriesComplexChart.css';
-import { getMockMonthData } from './helpers/lighthouse';
 import './TimeSeriesComplexChart.css';
 
 export default {
@@ -11,10 +12,66 @@ export default {
 } as Meta;
 
 const mockData = [
-  ...getMockMonthData({ days: 31, month: 3, max: 85, min: 40 }),
-  ...getMockMonthData({ days: 30, month: 4, max: 85, min: 40 }),
-  ...getMockMonthData({ days: 31, month: 5, max: 94, min: 40 }),
-  ...getMockMonthData({ days: 30, month: 6, max: 99, min: 88 }),
+  ...getMockMonthData({
+    annotations: [
+      'Hello world. This is an annotation',
+      'This is another annotation',
+    ],
+    customFields: {
+      id: 'abcd',
+    },
+    days: 31,
+    field: 'performance',
+    max: 85,
+    min: 40,
+    month: 3,
+    year: '2021',
+  }),
+  ...getMockMonthData({
+    annotations: [
+      'Hello world. This is an annotation',
+      'This is another annotation',
+    ],
+    customFields: {
+      id: 'abcd',
+    },
+    days: 30,
+    field: 'performance',
+    max: 85,
+    min: 40,
+    month: 4,
+    year: '2021',
+  }),
+  ...getMockMonthData({
+    annotations: [
+      'Hello world. This is an annotation',
+      'This is another annotation',
+    ],
+    customFields: {
+      id: 'abcd',
+    },
+    days: 31,
+    field: 'performance',
+    max: 94,
+    min: 40,
+    month: 5,
+    year: '2021',
+  }),
+  ...getMockMonthData({
+    annotations: [
+      'Hello world. This is an annotation',
+      'This is another annotation',
+    ],
+    customFields: {
+      id: 'abcd',
+    },
+    days: 30,
+    field: 'performance',
+    max: 99,
+    min: 88,
+    month: 6,
+    year: '2021',
+  }),
 ];
 
 const Template: Story = (args: any) => (
