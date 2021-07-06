@@ -77,6 +77,7 @@ const useAmChart = ({
   hasOnlyLastRange = false,
   hasXAxis = true,
   hasYAxis = true,
+  isTooltipDisabled = false,
   onClick,
   name,
   max = 100,
@@ -103,6 +104,7 @@ const useAmChart = ({
   hasOnlyLastRange?: boolean;
   hasXAxis?: boolean;
   hasYAxis?: boolean;
+  isTooltipDisabled?: boolean;
   max?: number;
   min?: number;
   name: string;
@@ -178,10 +180,6 @@ const useAmChart = ({
     dateAxis.dateFormats.setKey('month', 'M/d');
     dateAxis.periodChangeDateFormats.setKey('month', 'M/d');
 
-    // cursor
-    chart.cursor = new am4charts.XYCursor();
-    chart.cursor.xAxis = dateAxis;
-
     // value axis
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.renderer.disabled = !hasYAxis;
@@ -199,38 +197,47 @@ const useAmChart = ({
     series.name = name;
     series.strokeWidth = strokeWidth;
     series.fillOpacity = fillOpacity;
+    series.tooltip.disabled = isTooltipDisabled;
+
+    // cursor
+    if (!series.tooltip.disabled) {
+      chart.cursor = new am4charts.XYCursor();
+      chart.cursor.xAxis = dateAxis;
+    }
 
     // tooltip
-    const openingTooltipTag = `<div class="${tooltipClassName}">`;
-    const closingTooltipTag = '</div>';
-    const openingTooltipValueTag = `<div class="${tooltipValueClassName}">`;
-    const closingTooltipValueTag = '</div>';
-    series.tooltipHTML =
-      `${openingTooltipTag}${openingTooltipValueTag}` +
-      `{valueY}${closingTooltipValueTag}${closingTooltipTag}`;
+    if (!series.tooltip.disabled) {
+      const openingTooltipTag = `<div class="${tooltipClassName}">`;
+      const closingTooltipTag = '</div>';
+      const openingTooltipValueTag = `<div class="${tooltipValueClassName}">`;
+      const closingTooltipValueTag = '</div>';
+      series.tooltipHTML =
+        `${openingTooltipTag}${openingTooltipValueTag}` +
+        `{valueY}${closingTooltipValueTag}${closingTooltipTag}`;
 
-    if (hasAnnotations) {
-      series.adapter.add('tooltipHTML', (html: string, target: any) => {
-        const annotation = target?.tooltipDataItem?.dataContext?.annotation;
+      if (hasAnnotations) {
+        series.adapter.add('tooltipHTML', (html: string, target: any) => {
+          const annotation = target?.tooltipDataItem?.dataContext?.annotation;
 
-        if (!annotation) {
-          return html;
-        }
+          if (!annotation) {
+            return html;
+          }
 
-        const openingTooltipAnnotationTag = `<div class="${tooltipAnnotationClassName}">`;
-        const closingTooltipAnnotationTag = '</div>';
+          const openingTooltipAnnotationTag = `<div class="${tooltipAnnotationClassName}">`;
+          const closingTooltipAnnotationTag = '</div>';
 
-        return (
-          `${openingTooltipTag}` +
-          `${openingTooltipValueTag}{valueY}${closingTooltipValueTag}` +
-          `${openingTooltipAnnotationTag}{annotation}${closingTooltipAnnotationTag}` +
-          `${closingTooltipTag}`
-        );
-      });
+          return (
+            `${openingTooltipTag}` +
+            `${openingTooltipValueTag}{valueY}${closingTooltipValueTag}` +
+            `${openingTooltipAnnotationTag}{annotation}${closingTooltipAnnotationTag}` +
+            `${closingTooltipTag}`
+          );
+        });
+      }
     }
 
     // bullets
-    if (hasAnnotations) {
+    if (hasAnnotations && !series.tooltip.disabled) {
       const annotationBullet = series.bullets.push(
         new am4charts.CircleBullet(),
       );
@@ -275,25 +282,27 @@ const useAmChart = ({
       range.contents.fillOpacity = fillOpacity;
     });
 
-    if (sortedRanges.length) {
-      series.tooltip.getFillFromObject = false;
-      series.tooltip.adapter.add('x', (x: any) => {
-        series.tooltip.background.fill =
-          lastRangeColor ||
-          getColor({
-            chartColors: chart.colors,
-            colors,
-            ranges: sortedRanges,
-            value: series.tooltip.tooltipDataItem.valueY,
-          });
-        return x;
-      });
-    } else {
-      series.tooltip.background.fill = chart.colors.getIndex(0);
+    if (!series.tooltip.disabled) {
+      if (sortedRanges.length) {
+        series.tooltip.getFillFromObject = false;
+        series.tooltip.adapter.add('x', (x: any) => {
+          series.tooltip.background.fill =
+            lastRangeColor ||
+            getColor({
+              chartColors: chart.colors,
+              colors,
+              ranges: sortedRanges,
+              value: series.tooltip.tooltipDataItem.valueY,
+            });
+          return x;
+        });
+      } else {
+        series.tooltip.background.fill = chart.colors.getIndex(0);
+      }
     }
 
     // events
-    if (typeof onClick === 'function') {
+    if (typeof onClick === 'function' && !series.tooltip.disabled) {
       chart.events.on('hit', () => {
         onClick(series.tooltipDataItem.dataContext);
       });
@@ -317,6 +326,7 @@ const useAmChart = ({
     hasOnlyLastRange,
     hasXAxis,
     hasYAxis,
+    isTooltipDisabled,
     max,
     min,
     name,

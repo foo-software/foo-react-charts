@@ -10,31 +10,41 @@ export interface TimeSeriesComplexChartDataInterface {
   [key: string]: any;
 }
 
-export interface TimeSeriesComplexChartPropsInterface {
-  annotationBulletRadius?: number;
-  annotationBulletStrokeWidth?: number;
+export interface TimeSeriesComplexChartBasePropsInterface {
   chartId: string;
   color?: string;
   className?: string;
-  data: TimeSeriesComplexChartDataInterface[];
   dateMinGridDistance?: number;
-  field: string;
   fillOpacity?: number;
-  hasAnnotations?: boolean;
   hasBaseGrid?: boolean;
   hasGrid?: boolean;
-  hasOnlyLastRange?: boolean;
   hasXAxis?: boolean;
   hasYAxis?: boolean;
   height?: string;
+  isTooltipDisabled?: boolean;
   max?: number;
   min?: number;
+  padding?: number;
+  strokeWidth?: number;
+}
+
+export interface TimeSeriesComplexPlaceholderChartPropsInterface
+  extends TimeSeriesComplexChartBasePropsInterface {
+  data?: TimeSeriesComplexChartDataInterface[];
+}
+
+export interface TimeSeriesComplexChartPropsInterface
+  extends TimeSeriesComplexChartBasePropsInterface {
+  annotationBulletRadius?: number;
+  annotationBulletStrokeWidth?: number;
+  data: TimeSeriesComplexChartDataInterface[];
+  field: string;
+  hasAnnotations?: boolean;
+  hasOnlyLastRange?: boolean;
   name: string;
   onClick?: (data: any) => any;
-  padding?: number;
   ranges?: RangeInterface[];
   refreshId?: string;
-  strokeWidth?: number;
   tooltipClassName?: string;
   tooltipValueClassName?: string;
   tooltipAnnotationClassName?: string;
