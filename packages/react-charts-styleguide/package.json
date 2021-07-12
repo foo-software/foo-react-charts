@@ -1,6 +1,6 @@
 {
   "name": "@foo-software/react-charts-styleguide",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Adam Henson <adamhenson1979@gmail.com> (https://github.com/adamhenson)",
   "description": "Styleguide for Foo's React Charts",
   "license": "MIT",
@@ -19,9 +19,9 @@
     "build-storybook": "build-storybook"
   },
   "devDependencies": {
-    "@foo-software/react-charts-donut": "^1.0.3",
-    "@foo-software/react-charts-time-series": "^1.0.3",
-    "@foo-software/react-charts-time-series-complex": "^1.0.3",
+    "@foo-software/react-charts-donut": "^1.0.4",
+    "@foo-software/react-charts-time-series": "^1.0.4",
+    "@foo-software/react-charts-time-series-complex": "^1.0.4",
     "@storybook/addon-actions": "^6.1.21",
     "@storybook/addon-essentials": "^6.1.21",
     "@storybook/addon-links": "^6.1.21",
