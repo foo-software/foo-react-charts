@@ -1,10 +1,21 @@
 export const coinFlip = (percent: number) => Math.random() < percent / 100;
 
-// between 1 and the `max` argument
 export const getRandomNumber = ({
   min = 1,
   max,
+  shouldRound = true,
+  toFixedNumber,
 }: {
   min?: number;
   max: number;
-}) => Math.round(Math.random() * (max - min) + min);
+  shouldRound?: boolean;
+  toFixedNumber?: number;
+}) => {
+  const randomNumber = Math.random() * (max - min) + min;
+  const formattedNumber = !shouldRound
+    ? randomNumber
+    : Math.round(randomNumber);
+  return typeof toFixedNumber !== 'number'
+    ? formattedNumber
+    : parseFloat(formattedNumber.toFixed(toFixedNumber));
+};

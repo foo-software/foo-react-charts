@@ -8,6 +8,8 @@ export const getMockMonthData = ({
   max,
   min,
   month,
+  shouldRound,
+  toFixedNumber,
   year,
 }: {
   annotations?: string[];
@@ -19,6 +21,8 @@ export const getMockMonthData = ({
   max: number;
   min: number;
   month: number;
+  shouldRound?: boolean;
+  toFixedNumber?: number;
   year: string;
 }) => {
   const mockMonthData = [];
@@ -26,7 +30,7 @@ export const getMockMonthData = ({
     const shouldHaveAnnotation = coinFlip(10);
     mockMonthData.push({
       date: new Date(`${month}/${index}/${year}`),
-      [field]: getRandomNumber({ min, max }),
+      [field]: getRandomNumber({ min, max, shouldRound, toFixedNumber }),
       ...(shouldHaveAnnotation &&
         annotations.length && {
           annotation:
