@@ -80,8 +80,8 @@ const useAmChart = ({
   isTooltipDisabled = false,
   onClick,
   name,
-  max = 100,
-  min = 0,
+  max,
+  min,
   padding = 8,
   ranges,
   refreshId,
@@ -185,8 +185,12 @@ const useAmChart = ({
     valueAxis.renderer.disabled = !hasYAxis;
     valueAxis.cursorTooltipEnabled = false;
     valueAxis.renderer.baseGrid.disabled = !hasBaseGrid;
-    valueAxis.min = min;
-    valueAxis.max = max;
+    if (typeof min === 'number') {
+      valueAxis.min = min;
+    }
+    if (typeof max === 'number') {
+      valueAxis.max = max;
+    }
     valueAxis.renderer.grid.template.disabled = !hasGrid;
 
     // series
