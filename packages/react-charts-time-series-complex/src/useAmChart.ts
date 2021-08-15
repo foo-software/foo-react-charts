@@ -93,7 +93,7 @@ const useAmChart = ({
   tooltipAnnotationClassName = 'timeSeriesComplexChartRoot__tooltipAnnotation',
   valueAxisExtraMax = 0,
   valueAxisExtraMin = 0,
-  valueMinGridDistance = 50,
+  valueMinGridDistance = 40,
 }: {
   annotationBulletRadius?: number;
   annotationBulletStrokeWidth?: number;
