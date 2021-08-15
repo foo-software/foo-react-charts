@@ -22,7 +22,6 @@ jobs:
         run: |
           npm ci
           npm run lerna -- bootstrap --hoist
-          cd packages/react-charts-styleguide
           npm run build-storybook
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.0

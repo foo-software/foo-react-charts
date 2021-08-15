@@ -6,9 +6,11 @@
     "charts"
   ],
   "scripts": {
+    "build-storybook": "lerna run --stream --scope @foo-software/react-charts-styleguide build-storybook",
     "lerna": "lerna",
     "lint": "eslint ./packages/**/src --ext .ts,.tsx --cache --fix",
     "prettier": "prettier --single-quote --write './packages/**/*.{ts,tsx}'",
+    "storybook": "lerna run --stream --scope @foo-software/react-charts-styleguide storybook",
     "test": "lerna run test --stream"
   },
   "husky": {
