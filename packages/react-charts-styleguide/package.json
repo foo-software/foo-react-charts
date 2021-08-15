@@ -15,14 +15,14 @@
     "url": "git+https://github.com/foo-software/foo-react-charts.git"
   },
   "scripts": {
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 --no-manager-cache",
     "build-storybook": "build-storybook"
   },
   "devDependencies": {
     "@foo-software/react-charts-donut": "^1.0.6",
     "@foo-software/react-charts-time-series": "^1.0.6",
     "@foo-software/react-charts-time-series-complex": "^1.0.6",
-    "@storybook/addon-actions": "^6.1.21",
+    "@storybook/addon-actions": "^6.3.7",
     "@storybook/addon-essentials": "^6.1.21",
     "@storybook/addon-links": "^6.1.21",
     "@storybook/react": "^6.1.21",
