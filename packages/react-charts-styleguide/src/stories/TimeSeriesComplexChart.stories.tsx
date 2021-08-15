@@ -67,6 +67,8 @@ Default.args = {
   annotationBulletRadius: 4,
   annotationBulletStrokeWidth: 3,
   chartId: 'myChart',
+  dateAxisExtraMax: 0,
+  dateAxisExtraMin: 0,
   dateMinGridDistance: 50,
   field: 'performance',
   fillOpacity: 0.1,
@@ -104,4 +106,7 @@ Default.args = {
   tooltipClassName: 'timeSeriesComplexChartRoot__tooltip',
   tooltipValueClassName: 'timeSeriesComplexChartRoot__tooltipValue',
   tooltipAnnotationClassName: 'timeSeriesComplexChartRoot__tooltipAnnotation',
+  valueAxisExtraMax: 0,
+  valueAxisExtraMin: 0,
+  valueMinGridDistance: 40,
 };

@@ -10,6 +10,8 @@ const TimeSeriesComplexChart = ({
   color,
   chartId,
   data,
+  dateAxisExtraMax,
+  dateAxisExtraMin,
   dateMinGridDistance,
   field,
   fillOpacity,
@@ -32,6 +34,9 @@ const TimeSeriesComplexChart = ({
   tooltipClassName,
   tooltipValueClassName,
   tooltipAnnotationClassName,
+  valueAxisExtraMax,
+  valueAxisExtraMin,
+  valueMinGridDistance,
 }: TimeSeriesComplexChartPropsInterface) => {
   useAmChart({
     annotationBulletRadius,
@@ -39,6 +44,8 @@ const TimeSeriesComplexChart = ({
     chartId,
     color,
     data,
+    dateAxisExtraMax,
+    dateAxisExtraMin,
     dateMinGridDistance,
     field,
     fillOpacity,
@@ -60,6 +67,9 @@ const TimeSeriesComplexChart = ({
     tooltipClassName,
     tooltipValueClassName,
     tooltipAnnotationClassName,
+    valueAxisExtraMax,
+    valueAxisExtraMin,
+    valueMinGridDistance,
   });
 
   return (

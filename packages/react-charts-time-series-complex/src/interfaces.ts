@@ -38,6 +38,8 @@ export interface TimeSeriesComplexChartPropsInterface
   annotationBulletRadius?: number;
   annotationBulletStrokeWidth?: number;
   data: TimeSeriesComplexChartDataInterface[];
+  dateAxisExtraMax?: number;
+  dateAxisExtraMin?: number;
   field: string;
   hasAnnotations?: boolean;
   hasOnlyLastRange?: boolean;
@@ -48,4 +50,7 @@ export interface TimeSeriesComplexChartPropsInterface
   tooltipClassName?: string;
   tooltipValueClassName?: string;
   tooltipAnnotationClassName?: string;
+  valueAxisExtraMax?: number;
+  valueAxisExtraMin?: number;
+  valueMinGridDistance?: number;
 }

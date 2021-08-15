@@ -68,6 +68,8 @@ const useAmChart = ({
   chartId,
   color,
   data,
+  dateAxisExtraMax = 0,
+  dateAxisExtraMin = 0,
   dateMinGridDistance = 50,
   field,
   fillOpacity = 0.1,
@@ -89,12 +91,17 @@ const useAmChart = ({
   tooltipClassName = 'timeSeriesComplexChartRoot__tooltip',
   tooltipValueClassName = 'timeSeriesComplexChartRoot__tooltipValue',
   tooltipAnnotationClassName = 'timeSeriesComplexChartRoot__tooltipAnnotation',
+  valueAxisExtraMax = 0,
+  valueAxisExtraMin = 0,
+  valueMinGridDistance = 50,
 }: {
   annotationBulletRadius?: number;
   annotationBulletStrokeWidth?: number;
   chartId: string;
   color?: string;
   data: any;
+  dateAxisExtraMax?: number;
+  dateAxisExtraMin?: number;
   dateMinGridDistance?: number;
   field: string;
   fillOpacity?: number;
@@ -116,6 +123,9 @@ const useAmChart = ({
   tooltipClassName?: string;
   tooltipValueClassName?: string;
   tooltipAnnotationClassName?: string;
+  valueAxisExtraMax?: number;
+  valueAxisExtraMin?: number;
+  valueMinGridDistance?: number;
 }) => {
   useEffect(() => {
     // https://www.amcharts.com/docs/v4/reference/xychart/
@@ -179,6 +189,8 @@ const useAmChart = ({
     dateAxis.periodChangeDateFormats.setKey('week', 'M/d');
     dateAxis.dateFormats.setKey('month', 'M/d');
     dateAxis.periodChangeDateFormats.setKey('month', 'M/d');
+    dateAxis.extraMax = dateAxisExtraMax;
+    dateAxis.extraMin = dateAxisExtraMin;
 
     // value axis
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
@@ -192,6 +204,9 @@ const useAmChart = ({
       valueAxis.max = max;
     }
     valueAxis.renderer.grid.template.disabled = !hasGrid;
+    valueAxis.renderer.minGridDistance = valueMinGridDistance;
+    valueAxis.extraMax = valueAxisExtraMax;
+    valueAxis.extraMin = valueAxisExtraMin;
 
     // series
     const series: any = chart.series.push(new am4charts.LineSeries());
@@ -326,6 +341,8 @@ const useAmChart = ({
     annotationBulletRadius,
     annotationBulletStrokeWidth,
     chartId,
+    dateAxisExtraMax,
+    dateAxisExtraMin,
     dateMinGridDistance,
     field,
     fillOpacity,
@@ -347,6 +364,9 @@ const useAmChart = ({
     tooltipClassName,
     tooltipValueClassName,
     tooltipAnnotationClassName,
+    valueAxisExtraMax,
+    valueAxisExtraMin,
+    valueMinGridDistance,
   ]);
 };
 
