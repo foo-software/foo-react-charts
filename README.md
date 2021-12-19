@@ -1,6 +1,6 @@
 # React Charts
 
-Simple charts for React. The main purpose of the components in this repo is for use on [foo.software](https://www.foo.software), however they are open-sourced for public use as well. With that said, documentation isn't a major focus at this time, until higher adoption, but implentation details for each component are captured in [Storybook](https://foo-software.github.io/foo-react-charts/). To request specific documentation, improvements, or bugs - please feel free to open an isue.
+Simple charts for React. The main purpose of the components in this repo is for use on [foo.software](https://www.foo.software), however they're open-sourced for public use as well. With that said, documentation isn't a major focus at this time, until higher adoption, but implentation details for each component are captured in [Storybook](https://foo-software.github.io/foo-react-charts/). To request specific documentation, improvements, or bugs - please feel free to open an isue.
 
 # Packages
 
