@@ -144,7 +144,14 @@ const useAmChart = ({
     });
 
     // sort ranges by `min`
-    const sortedRanges = validRanges.sort((a, b) => a.max - b.max);
+    let sortedRanges = validRanges.sort((a, b) => a.max - b.max);
+
+    // if only the last color is needed... let's update `sortedRanges`
+    // to be an array of 1 color... so no logic consuming it somehow
+    // picks up other colors.
+    if (sortedRanges.length && hasOnlyLastRange) {
+      sortedRanges = [sortedRanges[sortedRanges.length - 1]];
+    }
 
     // create a dictoonary of colors for quick lookup
     const colors: any = {};
