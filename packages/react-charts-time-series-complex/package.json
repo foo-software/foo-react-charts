@@ -1,6 +1,6 @@
 {
   "name": "@foo-software/react-charts-time-series-complex",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "author": "Adam Henson <adamhenson1979@gmail.com> (https://github.com/adamhenson)",
   "description": "A complex time series chart component for React",
   "homepage": "https://github.com/foo-software/foo-react-charts/tree/master/packages/react-charts-time-series-complex",
