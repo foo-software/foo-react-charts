@@ -222,8 +222,11 @@ const useAmChart = ({
     series.yAxis = valueAxis;
     series.name = name;
     series.strokeWidth = strokeWidth;
-    series.fillOpacity = fillOpacity;
     series.tooltip.disabled = isTooltipDisabled;
+
+    if (!sortedRanges.length) {
+      series.fillOpacity = fillOpacity;
+    }
 
     // cursor
     if (!series.tooltip.disabled) {
