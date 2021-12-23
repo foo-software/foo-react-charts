@@ -168,7 +168,7 @@ const useAmChart = ({
           value: chart.data[chart.data.length - 1][field],
         });
 
-    // if only the last color is needed... let's update `sortedRanges`
+    // if only the last color is needed... let's update the colors list
     // to be an array of 1 color... so no logic consuming it somehow
     // picks up other colors.
     if (lastRangeColor) {
