@@ -223,10 +223,7 @@ const useAmChart = ({
     series.name = name;
     series.strokeWidth = strokeWidth;
     series.tooltip.disabled = isTooltipDisabled;
-
-    if (!sortedRanges.length) {
-      series.fillOpacity = fillOpacity;
-    }
+    series.fillOpacity = fillOpacity;
 
     // cursor
     if (!series.tooltip.disabled) {
