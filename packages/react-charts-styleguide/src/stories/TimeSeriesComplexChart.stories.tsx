@@ -4,6 +4,7 @@ import TimeSeriesComplexChart, {
   getMockMonthData,
 } from '@foo-software/react-charts-time-series-complex';
 import '@foo-software/react-charts-time-series-complex/dist/TimeSeriesComplexChart.css';
+import mockCryptoData from '../mocks/mockCryptoData';
 import './TimeSeriesComplexChart.css';
 
 export default {
@@ -109,4 +110,45 @@ Default.args = {
   valueAxisExtraMax: 0,
   valueAxisExtraMin: 0,
   valueMinGridDistance: 40,
+};
+
+const field = 'value';
+
+const TemplateWithStockData: Story = (args: any) => (
+  <TimeSeriesComplexChart {...args} className="chart" data={mockCryptoData} />
+);
+
+export const DollarsAndDecimals = TemplateWithStockData.bind({});
+DollarsAndDecimals.args = {
+  chartId: 'myChart2',
+  dateAxisExtraMax: 0.01,
+  dateAxisExtraMin: 0.01,
+  field,
+  hasAnnotations: false,
+  hasOnlyLastRange: true,
+  hasXAxis: false,
+  hasYAxis: false,
+  height: 200,
+  name: 'BAT',
+  onClick: (data: any) => console.log(data),
+  padding: 0,
+  ranges: [
+    {
+      max: mockCryptoData[0].value,
+      min: 0,
+      color: '#ff1744',
+    },
+    {
+      max: Infinity,
+      min: mockCryptoData[0].value,
+      color: '#31D3A5',
+    },
+  ],
+  refreshId: 'myIdToTriggerRerenderWhenChangedOtherwiseNoNeedForIt',
+  strokeWidth: 2,
+  tooltipClassName: 'timeSeriesComplexChartRoot__tooltip',
+  tooltipValueClassName: 'timeSeriesComplexChartRoot__tooltipValue',
+  valueAxisExtraMax: 0.01,
+  valueAxisExtraMin: 0.01,
+  valueMinGridDistance: 1,
 };
