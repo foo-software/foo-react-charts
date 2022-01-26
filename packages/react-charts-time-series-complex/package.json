@@ -19,6 +19,7 @@
   "scripts": {
     "build": "tsc && npm run build:styles",
     "build:styles": "cp src/TimeSeriesComplexChart.css dist/TimeSeriesComplexChart.css",
+    "jest": "jest",
     "prepare": "npm run build"
   },
   "dependencies": {

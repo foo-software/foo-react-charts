@@ -94,6 +94,10 @@ const useAmChart = ({
   valueAxisExtraMax = 0,
   valueAxisExtraMin = 0,
   valueMinGridDistance = 40,
+  valuePrefix = '',
+  valueSuffix = '',
+  valueAxisPrefix = '',
+  valueAxisSuffix = '',
 }: {
   annotationBulletRadius?: number;
   annotationBulletStrokeWidth?: number;
@@ -126,6 +130,10 @@ const useAmChart = ({
   valueAxisExtraMax?: number;
   valueAxisExtraMin?: number;
   valueMinGridDistance?: number;
+  valuePrefix?: string;
+  valueSuffix?: string;
+  valueAxisPrefix?: string;
+  valueAxisSuffix?: string;
 }) => {
   useEffect(() => {
     // https://www.amcharts.com/docs/v4/reference/xychart/
@@ -214,6 +222,8 @@ const useAmChart = ({
     valueAxis.renderer.minGridDistance = valueMinGridDistance;
     valueAxis.extraMax = valueAxisExtraMax;
     valueAxis.extraMin = valueAxisExtraMin;
+    valueAxis.numberFormatter = new am4core.NumberFormatter();
+    valueAxis.numberFormatter.numberFormat = `${valueAxisPrefix}#${valueAxisSuffix}`;
 
     // series
     const series: any = chart.series.push(new am4charts.LineSeries());
@@ -239,7 +249,7 @@ const useAmChart = ({
       const closingTooltipValueTag = '</div>';
       series.tooltipHTML =
         `${openingTooltipTag}${openingTooltipValueTag}` +
-        `{valueY}${closingTooltipValueTag}${closingTooltipTag}`;
+        `${valuePrefix}{valueY}${valueSuffix}${closingTooltipValueTag}${closingTooltipTag}`;
 
       if (hasAnnotations) {
         series.adapter.add('tooltipHTML', (html: string, target: any) => {
@@ -284,7 +294,7 @@ const useAmChart = ({
 
       annotationBullet.adapter.add(
         'stroke',
-        function (color: string, target: any) {
+        function (_color: string, target: any) {
           return (
             lastRangeColor ||
             getColor({
@@ -301,12 +311,7 @@ const useAmChart = ({
     // ranges
     sortedRanges.forEach((rangeData, index) => {
       const range = valueAxis.createSeriesRange(series);
-      if (rangeData.max < 1) {
-        range.value =
-          rangeData.max + parseFloat(`0.0${Math.floor(strokeWidth / 2)}`);
-      } else {
-        range.value = rangeData.max + Math.floor(strokeWidth / 2);
-      }
+      range.value = rangeData.max;
       range.endValue = rangeData.min;
       range.contents.stroke = lastRangeColor || chart.colors.getIndex(index);
       range.contents.fill = range.contents.stroke;

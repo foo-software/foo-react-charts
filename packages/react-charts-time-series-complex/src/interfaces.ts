@@ -53,4 +53,8 @@ export interface TimeSeriesComplexChartPropsInterface
   valueAxisExtraMax?: number;
   valueAxisExtraMin?: number;
   valueMinGridDistance?: number;
+  valueAxisPrefix?: string;
+  valueAxisSuffix?: string;
+  valuePrefix?: string;
+  valueSuffix?: string;
 }
