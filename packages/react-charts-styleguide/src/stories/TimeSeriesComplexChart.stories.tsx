@@ -87,12 +87,12 @@ Default.args = {
   padding: 8,
   ranges: [
     {
-      max: 49,
+      max: 49.99999999999,
       min: 0,
       color: '#ff1744',
     },
     {
-      max: 89,
+      max: 89.99999999999,
       min: 50,
       color: '#f9a115',
     },

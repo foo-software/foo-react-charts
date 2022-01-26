@@ -301,12 +301,7 @@ const useAmChart = ({
     // ranges
     sortedRanges.forEach((rangeData, index) => {
       const range = valueAxis.createSeriesRange(series);
-      if (rangeData.max < 1) {
-        range.value =
-          rangeData.max + parseFloat(`0.0${Math.floor(strokeWidth / 2)}`);
-      } else {
-        range.value = rangeData.max + Math.floor(strokeWidth / 2);
-      }
+      range.value = rangeData.max;
       range.endValue = rangeData.min;
       range.contents.stroke = lastRangeColor || chart.colors.getIndex(index);
       range.contents.fill = range.contents.stroke;
