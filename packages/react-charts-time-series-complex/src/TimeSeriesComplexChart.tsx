@@ -37,6 +37,10 @@ const TimeSeriesComplexChart = ({
   valueAxisExtraMax,
   valueAxisExtraMin,
   valueMinGridDistance,
+  valuePrefix,
+  valueSuffix,
+  valueAxisPrefix,
+  valueAxisSuffix,
 }: TimeSeriesComplexChartPropsInterface) => {
   useAmChart({
     annotationBulletRadius,
@@ -70,6 +74,10 @@ const TimeSeriesComplexChart = ({
     valueAxisExtraMax,
     valueAxisExtraMin,
     valueMinGridDistance,
+    valuePrefix,
+    valueSuffix,
+    valueAxisPrefix,
+    valueAxisSuffix,
   });
 
   return (
