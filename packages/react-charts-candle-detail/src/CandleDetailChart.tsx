@@ -6,7 +6,6 @@ interface CandlePropsInterface {
   high: number;
   low: number;
   open: number;
-  // trades: number;
   time: string;
   volume: number;
 }
@@ -17,6 +16,7 @@ interface CandleDetailChartPropsInterface {
   className?: string;
   colorGreen?: string;
   colorRed?: string;
+  heightChart?: string;
   link?: string;
   widthPercentBody?: number;
   widthWick?: number;
@@ -30,11 +30,13 @@ const CandleDetailChart = ({
   className,
   colorGreen = '#26a699',
   colorRed = '#f23645',
+  heightChart = '360px',
   link,
-  widthPercentBody = 3,
+  widthPercentBody = 20,
   widthWick = 2,
 }: CandleDetailChartPropsInterface) => {
   let high = 0;
+  let highestVolume = 0;
   let low = 0;
 
   for (const candle of candles) {
@@ -44,6 +46,9 @@ const CandleDetailChart = ({
     if (!high || candle.high > high) {
       high = candle.high;
     }
+    if (!highestVolume || candle.volume > highestVolume) {
+      highestVolume = candle.volume;
+    }
   }
 
   const percentWidth = 100 / candles.length;
@@ -52,74 +57,129 @@ const CandleDetailChart = ({
   return (
     <div className={classnames(className, componentName)}>
       <h2 className={`${componentName}__header`}>{assetSymbol}</h2>
-      <section
-        className={`${componentName}__section--top`}
+      <div
+        className={`${componentName}__charts`}
         style={{
-          flexBasis: `${percentWidth}%`,
+          height: heightChart,
         }}
       >
-        {candles.map((current) => {
-          const isBearish = current.close < current.open;
-          const color = isBearish ? colorRed : colorGreen;
+        <section
+          className={classnames(
+            `${componentName}__section`,
+            `${componentName}__section--top`,
+          )}
+        >
+          {candles.map((current) => {
+            const isBearish = current.close < current.open;
+            const color = isBearish ? colorRed : colorGreen;
 
-          const wickPercentToTop =
-            ((high - current.high) / overallHighLowDiff) * 100;
-          const wickPercentToBottom =
-            ((low - current.low) / overallHighLowDiff) * 100;
-          const wickPercentHeight = wickPercentToTop - wickPercentToBottom;
+            const wickPercentToTop =
+              ((high - current.high) / overallHighLowDiff) * 100;
+            const wickPercentHeight =
+              ((current.high - current.low) / overallHighLowDiff) * 100;
 
-          const topOpenOrClose = isBearish ? current.close : current.open;
-          const bottomOpenOrClose = isBearish ? current.open : current.close;
-          const bodyPercentToTop =
-            ((high - topOpenOrClose) / overallHighLowDiff) * 100;
-          const bodyPercentToBottom =
-            ((low - bottomOpenOrClose) / overallHighLowDiff) * 100;
-          const bodyPercentHeight = bodyPercentToTop - bodyPercentToBottom;
+            const topOpenOrClose = isBearish ? current.open : current.close;
+            const bottomOpenOrClose = isBearish ? current.close : current.open;
+            const bodyPercentToTop =
+              ((high - topOpenOrClose) / overallHighLowDiff) * 100;
+            const bodyPercentHeight =
+              ((topOpenOrClose - bottomOpenOrClose) / overallHighLowDiff) * 100;
 
-          return (
-            <div className={`${componentName}-candle`} key={current.time}>
+            return (
               <div
-                className={`${componentName}-candle__inner`}
+                className={`${componentName}-candle`}
+                key={`candle-${assetSymbol}-${current.time}`}
                 style={{
-                  width: `${widthPercentBody}%`,
+                  flexBasis: `${percentWidth}%`,
                 }}
               >
                 <div
-                  className={classnames(
-                    `${componentName}-candle__part`,
-                    `${componentName}-candle__part--wick`,
-                  )}
+                  className={`${componentName}-candle__inner`}
                   style={{
-                    backgroundColor: color,
-                    height: `${wickPercentHeight}%`,
-                    left: `calc(50% - ${widthWick / 2}px`,
-                    top: `${wickPercentToTop}%`,
-                    width: `${widthWick}px`,
+                    width: `${widthPercentBody}%`,
                   }}
-                />
-                <div
-                  className={classnames(
-                    `${componentName}-candle__part`,
-                    `${componentName}-candle__part--body`,
-                  )}
-                  style={{
-                    backgroundColor: color,
-                    height: `${bodyPercentHeight}%`,
-                    top: `${bodyPercentToTop}%`,
-                  }}
-                />
+                >
+                  <div
+                    className={classnames(
+                      `${componentName}__part`,
+                      `${componentName}__part--wick`,
+                    )}
+                    style={{
+                      backgroundColor: color,
+                      height: `${wickPercentHeight}%`,
+                      left: `calc(50% - ${widthWick / 2}px`,
+                      top: `${wickPercentToTop}%`,
+                      width: `${widthWick}px`,
+                    }}
+                  />
+                  <div
+                    className={classnames(
+                      `${componentName}__part`,
+                      `${componentName}__part--body`,
+                    )}
+                    style={{
+                      backgroundColor: color,
+                      height: `${bodyPercentHeight}%`,
+                      top: `${bodyPercentToTop}%`,
+                    }}
+                  />
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </section>
-      {/* <section className={`${componentName}__section--bottom`}>
-        {candles.map(current => (
-          <div className={`${componentName}-volume-block`} />
-        ))}
-      </section> */}
+            );
+          })}
+        </section>
+        <section
+          className={classnames(
+            `${componentName}__section`,
+            `${componentName}__section--bottom`,
+          )}
+        >
+          {candles.map((current) => {
+            const isBearish = current.close < current.open;
+            const color = isBearish ? colorRed : colorGreen;
+
+            const volumePercentToTop =
+              ((highestVolume - current.volume) / highestVolume) * 100;
+            const volumePercentHeight = 100 - volumePercentToTop;
+
+            return (
+              <div
+                className={`${componentName}-bar`}
+                key={`bars-${assetSymbol}-${current.time}`}
+                style={{
+                  flexBasis: `${percentWidth}%`,
+                }}
+              >
+                <div
+                  className={`${componentName}-bar__inner`}
+                  style={{
+                    width: `${widthPercentBody}%`,
+                  }}
+                >
+                  <div
+                    className={classnames(
+                      `${componentName}__part`,
+                      `${componentName}__part--bar`,
+                    )}
+                    style={{
+                      backgroundColor: color,
+                      height: `${volumePercentHeight}%`,
+                      top: `${volumePercentToTop}%`,
+                    }}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </section>
+      </div>
       {link && (
-        <a className={`${componentName}__link`} href={link} target="_blank" rel="noreferrer">
+        <a
+          className={`${componentName}__link`}
+          href={link}
+          target="_blank"
+          rel="noreferrer"
+        >
           details
         </a>
       )}

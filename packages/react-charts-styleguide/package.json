@@ -19,6 +19,7 @@
     "build-storybook": "build-storybook"
   },
   "devDependencies": {
+    "@foo-software/react-charts-candle-detail": "^2.1.1",
     "@foo-software/react-charts-donut": "^2.1.1",
     "@foo-software/react-charts-time-series": "^2.1.1",
     "@foo-software/react-charts-time-series-complex": "^2.1.1",

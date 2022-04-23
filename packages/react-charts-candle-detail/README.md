@@ -1,12 +1,8 @@
-# `@foo-software/react-charts-time-series-complex`
+# `@foo-software/react-charts-candle-detail`
 
-A time series component for React. This component uses [`amCharts`](https://www.amcharts.com).
+A simple snapshot view of a few candles from a candlestick chart. This is meant to just show the general pattern structure (tested on 3 candles).
 
-Checkout our [Storybook instance](https://foo-software.github.io/foo-react-charts/) for component API details (or [`TimeSeriesComplexChart.tsx`](./src/TimeSeriesComplexChart.tsx))
-
-# Interface
-
-For the most updated representation of component API see the [TypeScript interfaces](./src/interfaces.ts).
+Checkout our [Storybook instance](https://foo-software.github.io/foo-react-charts/) for component API details (or [`CandleDetailChart.tsx`](./src/CandleDetailChart.tsx))
 
 <hr />
 

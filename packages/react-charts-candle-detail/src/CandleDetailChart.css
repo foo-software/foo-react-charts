@@ -7,21 +7,51 @@
   font-family: var(--candle-detail-chart-font-roboto-mono);
 }
 
-.candleDetailChart__section--top {
-  display: flex;
-  justify-content: space-between;
+.candleDetailChart__part {
+  position: absolute;
+  width: 100%;
 }
 
+.candleDetailChart__header {
+  display: block;
+  text-align: center;
+}
+
+.candleDetailChart__link {
+  color: #000000;
+  display: block;
+  text-align: center;
+}
+
+.candleDetailChart__charts {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.candleDetailChart__section {
+  box-sizing: border-box;
+  display: flex;
+  flex-basis: 100%;
+  height: 50%;
+  padding: 0.5rem;
+}
+
+.candleDetailChart__section--top {
+  border: 2px solid rgba(199, 199, 199, 0.2);
+}
+
+.candleDetailChart__section--bottom {
+  background: rgba(199, 199, 199, 0.2);
+}
+
+.candleDetailChart-bar,
 .candleDetailChart-candle {
   display: flex;
   justify-content: center;
 }
 
+.candleDetailChart-bar__inner,
 .candleDetailChart-candle__inner {
   position: relative;
-}
-
-.candleDetailChart-candle__part {
-  position: absolute;
-  width: 100%;
 }
