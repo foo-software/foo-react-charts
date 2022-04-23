@@ -1,6 +1,6 @@
 {
   "name": "@foo-software/react-charts-candle-detail",
-  "version": "0.0.1",
+  "version": "2.1.1",
   "author": "Adam Henson <adamhenson1979@gmail.com> (https://github.com/adamhenson)",
   "description": "A detail candlestick chart component for React",
   "homepage": "https://github.com/foo-software/foo-react-charts/tree/master/packages/react-charts-candle-detail",
