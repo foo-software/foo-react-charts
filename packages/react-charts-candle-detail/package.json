@@ -1,0 +1,47 @@
+{
+  "name": "@foo-software/react-charts-candle-detail",
+  "version": "0.0.1",
+  "author": "Adam Henson <adamhenson1979@gmail.com> (https://github.com/adamhenson)",
+  "description": "A detail candlestick chart component for React",
+  "homepage": "https://github.com/foo-software/foo-react-charts/tree/master/packages/react-charts-candle-detail",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "react",
+    "charts",
+    "detail",
+    "candlestick",
+    "stocks"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foo-software/foo-react-charts.git"
+  },
+  "scripts": {
+    "build": "tsc && npm run build:styles",
+    "build:styles": "cp src/CandleDetailChart.css dist/CandleDetailChart.css",
+    "jest": "jest",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "classnames": "^2.3.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^13.0.16",
+    "@types/jest": "^26.0.22",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.2",
+    "jest": "^26.6.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "ts-jest": "^26.5.4",
+    "typescript": "^4.2.3"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}

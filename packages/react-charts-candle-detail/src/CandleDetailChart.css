@@ -1,0 +1,27 @@
+:root {
+  --candle-detail-chart-font-default: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --candle-detail-chart-font-roboto-mono: 'Roboto Mono', monospace;
+}
+
+.candleDetailChart {
+  font-family: var(--candle-detail-chart-font-roboto-mono);
+}
+
+.candleDetailChart__section--top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.candleDetailChart-candle {
+  display: flex;
+  justify-content: center;
+}
+
+.candleDetailChart-candle__inner {
+  position: relative;
+}
+
+.candleDetailChart-candle__part {
+  position: absolute;
+  width: 100%;
+}
