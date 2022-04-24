@@ -4,6 +4,7 @@ on:
     branches:
       - master
     paths: [
+      "packages/react-charts-candle-detail/**",
       "packages/react-charts-donut/**",
       "packages/react-charts-styleguide/**",
       "packages/react-charts-time-series/**"

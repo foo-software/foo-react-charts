@@ -1,6 +1,6 @@
 # `@foo-software/react-charts-candle-detail`
 
-A simple snapshot view of a few candles from a candlestick chart. This is meant to just show the general pattern structure (tested on 3 candles).
+A simple snapshot candlestick view of stock or stock-like data. This is meant to just show the general pattern structure (tested on 3 candles).
 
 Checkout our [Storybook instance](https://foo-software.github.io/foo-react-charts/) for component API details (or [`CandleDetailChart.tsx`](./src/CandleDetailChart.tsx))
 
