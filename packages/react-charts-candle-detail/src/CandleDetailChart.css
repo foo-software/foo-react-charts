@@ -12,14 +12,27 @@
   width: 100%;
 }
 
+.candleDetailChart__header-container {
+  margin-bottom: 0.8rem;
+}
+
 .candleDetailChart__header {
   display: block;
+  text-align: center;
+  margin: 0 0 0.5rem;
+}
+
+.candleDetailChart__subheader {
+  display: block;
+  font-size: 0.65rem;
+  margin: 0;
   text-align: center;
 }
 
 .candleDetailChart__link {
   color: #000000;
   display: block;
+  font-size: 0.8rem;
   text-align: center;
 }
 

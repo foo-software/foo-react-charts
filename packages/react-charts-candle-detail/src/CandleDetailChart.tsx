@@ -53,10 +53,19 @@ const CandleDetailChart = ({
 
   const percentWidth = 100 / candles.length;
   const overallHighLowDiff = high - low;
+  const date = new Date(candles[0].time).toLocaleDateString();
+  const timeframeStart = new Date(candles[0].time).toLocaleTimeString();
+  const timeframeEnd = new Date(candles[2].time).toLocaleTimeString();
 
   return (
     <div className={classnames(className, componentName)}>
-      <h2 className={`${componentName}__header`}>{assetSymbol}</h2>
+      <header className={`${componentName}__header-container`}>
+        <h2 className={`${componentName}__header`}>{assetSymbol}</h2>
+        <h3 className={`${componentName}__subheader`}>{date}</h3>
+        <h3 className={`${componentName}__subheader`}>
+          {timeframeStart} - {timeframeEnd}
+        </h3>
+      </header>
       <div
         className={`${componentName}__charts`}
         style={{
