@@ -39,7 +39,7 @@
 .candleDetailChart__charts {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 
 .candleDetailChart__section {
