@@ -7,6 +7,10 @@
   font-family: var(--candle-detail-chart-font-roboto-mono);
 }
 
+.candleDetailChart--clickable {
+  cursor: pointer;
+}
+
 .candleDetailChart__part {
   position: absolute;
   width: 100%;

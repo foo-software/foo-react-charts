@@ -43,9 +43,28 @@ const CandleDetailChart = ({
     if (!low || candle.low < low) {
       low = candle.low;
     }
+
+    // shouldn't have to do this, but with some data providers
+    // the open or close is higher or lower than the high or low
+    if (candle.open < low) {
+      low = candle.open;
+    }
+    if (candle.close < low) {
+      low = candle.close;
+    }
+
     if (!high || candle.high > high) {
       high = candle.high;
     }
+
+    // shouldn't have to do this either
+    if (candle.open > high) {
+      high = candle.open;
+    }
+    if (candle.close > high) {
+      high = candle.close;
+    }
+
     if (!highestVolume || candle.volume > highestVolume) {
       highestVolume = candle.volume;
     }
@@ -58,7 +77,12 @@ const CandleDetailChart = ({
   const timeframeEnd = new Date(candles[2].time).toLocaleTimeString();
 
   return (
-    <div className={classnames(className, componentName)}>
+    <div
+      className={classnames(className, componentName, {
+        [`${componentName}--clickable`]: !!link,
+      })}
+      onClick={!link ? undefined : () => window.open(link, '_blank')}
+    >
       <header className={`${componentName}__header-container`}>
         <h2 className={`${componentName}__header`}>{assetSymbol}</h2>
         <h3 className={`${componentName}__subheader`}>{date}</h3>
@@ -87,12 +111,12 @@ const CandleDetailChart = ({
             const wickPercentHeight =
               ((current.high - current.low) / overallHighLowDiff) * 100;
 
-            const topOpenOrClose = isBearish ? current.open : current.close;
-            const bottomOpenOrClose = isBearish ? current.close : current.open;
+            const bodyTop = isBearish ? current.open : current.close;
+            const bodyBottom = isBearish ? current.close : current.open;
             const bodyPercentToTop =
-              ((high - topOpenOrClose) / overallHighLowDiff) * 100;
+              ((high - bodyTop) / overallHighLowDiff) * 100;
             const bodyPercentHeight =
-              ((topOpenOrClose - bottomOpenOrClose) / overallHighLowDiff) * 100;
+              ((bodyTop - bodyBottom) / overallHighLowDiff) * 100;
 
             return (
               <div
@@ -182,16 +206,6 @@ const CandleDetailChart = ({
           })}
         </section>
       </div>
-      {link && (
-        <a
-          className={`${componentName}__link`}
-          href={link}
-          target="_blank"
-          rel="noreferrer"
-        >
-          details
-        </a>
-      )}
     </div>
   );
 };
