@@ -140,7 +140,7 @@ const CandleDetailChart = ({
                     style={{
                       backgroundColor: color,
                       height: `${wickPercentHeight}%`,
-                      left: `calc(50% - ${widthWick / 2}px`,
+                      left: `calc(50% - ${widthWick / 2}px)`,
                       top: `${wickPercentToTop}%`,
                       width: `${widthWick}px`,
                     }}
