@@ -223,7 +223,7 @@ const useAmChart = ({
     valueAxis.extraMax = valueAxisExtraMax;
     valueAxis.extraMin = valueAxisExtraMin;
     valueAxis.numberFormatter = new am4core.NumberFormatter();
-    valueAxis.numberFormatter.numberFormat = `${valueAxisPrefix}#${valueAxisSuffix}`;
+    valueAxis.numberFormatter.numberFormat = `${valueAxisPrefix}#,###.##${valueAxisSuffix}`;
 
     // series
     const series: any = chart.series.push(new am4charts.LineSeries());
